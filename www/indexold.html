@@ -1,0 +1,218 @@
+<meta name="viewport" content="width=device-width">
+<html lang="en">
+<head>
+
+<style media="screen" type="text/css">
+body {
+    margin: 20px 20px;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+}
+
+p { padding-bottom: 30px; }
+
+li {
+    margin-bottom: 10px;
+}
+
+.button {
+    display: inline-block;
+    text-decoration: none;
+    padding: 5px 10px;
+}
+
+[data-notifications] {
+    position: relative;
+}
+
+[data-notifications]:after {
+    content: attr(data-notifications);
+    position: absolute;
+    background: blue;
+    border-radius: 50%;
+    display: inline-block;
+    padding: 0.3em;
+    color: #f2f2f2;
+    right: -10px;
+    top: -10px;
+}
+
+</style>
+
+
+</head>
+<body>
+
+<script type='text/javascript' src='res/jquery-2.1.1.min.js'></script>
+<script src="js/jquery.serializejson.js"></script>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+<script src="js/bootstrap.min.js"></script>
+<header>
+    <div class="navbar navbar-static-top navbar-default">
+        <div class="navbar-header">
+        	<ul class="nav nav-tabs">
+            	<li><a class="button" id="world" href="#" onclick="getList('world')"><img src="png/glyphicons-341-globe.png"><span class="badge" id="worldspan"></span></a></li>
+	     		<li><a class="button" id="family" href="#" onclick="getList('family')"><img src="png/glyphicons-25-parents.png"><span class="badge" id="familyspan"></span></a></li>
+	     		<li><a class="button" id="friends" href="#" onclick="getList('friends')"><img src="png/glyphicons-4-user.png"><span class="badge" id="friendsspan"></span></a></li>
+	     		<li><a class="button" id="party" href="#" onclick="getList('party')"><img src="png/glyphicons-275-beer.png"><span class="badge" id="partyspan"></span></a></li>
+	     		<li><a class="button" id="private" href="#" onclick="getList('private')"><img src="png/glyphicons-246-chat.png"><span class="badge" id="privatespan"></span></a></li>
+            	          	<li><a class="button" id="add" href="#" onclick="action_add_post()"><img src="png/glyphicons-433-plus.png"><span class="badge" id="privatespan"></span></a></li>
+    
+            </ul>
+        </div>
+    </div>
+</header>
+    
+<div id="listDiv">
+</div>
+</body>
+
+<script>
+username = 'Superman';
+doCounts('Superman');
+
+function doCounts(username) {
+		var jsonData = $.ajax({
+			url: "http://www.a-information.com/chatdawg/worldcount.php?usid="+username,
+			dataType:"json",
+			async: false
+			}).responseText;
+		
+		// Create our data table out of JSON data loaded from server.
+		//document.getElementById("world").setAttribute('data-notifications',jsonData);
+		document.getElementById("worldspan").innerHTML = jsonData;
+		
+		var jsonData = $.ajax({
+			url: "http://www.a-information.com/chatdawg/familycount.php?usid="+username,
+			dataType:"json",
+			async: false
+			}).responseText;
+		
+		// Create our data table out of JSON data loaded from server.
+		//document.getElementById("family").setAttribute('data-notifications',jsonData);
+		document.getElementById("familyspan").innerHTML = jsonData;
+		
+		var jsonData = $.ajax({
+			url: "http://www.a-information.com/chatdawg/friendscount.php?usid="+username,
+			dataType:"json",
+			async: false
+			}).responseText;
+		
+		// Create our data table out of JSON data loaded from server.
+		//document.getElementById("friends").setAttribute('data-notifications',jsonData);
+		document.getElementById("friendsspan").innerHTML = jsonData;
+		
+		var jsonData = $.ajax({
+			url: "http://www.a-information.com/chatdawg/partycount.php?usid="+username,
+			dataType:"json",
+			async: false
+			}).responseText;
+		
+		// Create our data table out of JSON data loaded from server.
+		//document.getElementById("party").setAttribute('data-notifications',jsonData);
+		document.getElementById("partyspan").innerHTML = jsonData;
+		
+		var jsonData = $.ajax({
+			url: "http://www.a-information.com/chatdawg/privatecount.php?usid="+username,
+			dataType:"json",
+			async: false
+			}).responseText;
+		
+		// Create our data table out of JSON data loaded from server.
+		//document.getElementById("private").setAttribute('data-notifications',jsonData);
+		document.getElementById("privatespan").innerHTML = jsonData;
+		
+		
+		
+}
+  
+function getList(type){
+		var link = $(this),
+        	button = link.attr('id');
+		
+		var jsonData = $.ajax({
+				url: "http://www.a-information.com/chatdawg/"+type+"posts.php?usid="+username,
+				dataType:"json",
+				async: false
+				}).responseText;
+				
+				var groupcolor = "#0000FF";
+				switch (type)
+					{
+					    case "world":
+					        {groupcolor="#F3F8F4";}
+					        break;
+					    case "family":
+					        {groupcolor="#E9F1EA";}
+					        break;
+					    case "friends":
+					        {groupcolor="#EAF1FB";}
+					        break;
+					    case "party":
+					        {groupcolor="#F7F5FE";}
+					        break;
+					    case "private":
+					        {groupcolor="#AA00FF";}
+					        break;
+					    default:
+					        {groupcolor="#DD00FF";}
+					        break;
+					}
+				
+				document.getElementById(type).style ="background-color: "+groupcolor;
+				
+				var contentList = "<div class='container-fluid'  style='background-color: "+groupcolor+"'><div class='row'>";
+				jsonData = JSON.parse(jsonData);
+				$.each(jsonData, function(i,item){
+				
+					//No pic
+					if (item.postpictureID == null)
+					{
+					contentList += "<b>" +item.username + "</b><br>" + item.post + "<br><br>"+" "+item.date+" &nbsp;&nbsp;&nbsp;&nbsp; <img src='png/glyphicons-499-sunglasses.png'> "+Math.floor((Math.random() * 10) + 1)+" &nbsp;&nbsp;&nbsp;&nbsp; <img src='png/glyphicons-344-thumbs-up.png' >"+Math.floor((Math.random() * 10) + 1)+" <img src='png/glyphicons-345-thumbs-down.png'>"+Math.floor((Math.random() * 10) + 1)+"   <hr>";
+					}
+					else
+					{
+					contentList += "<b>" +item.username + "</b><br>" + item.post + "<br><img src='http://www.a-information.com/chatdawg/fups/"+item.postpictureID +"' class='img-responsive'><br><br>  "+" "+item.date+" &nbsp;&nbsp;&nbsp;&nbsp; <img src='png/glyphicons-499-sunglasses.png'>"+Math.floor((Math.random() * 10) + 1)+" &nbsp;&nbsp;&nbsp;&nbsp; <img src='png/glyphicons-344-thumbs-up.png'>  " +Math.floor((Math.random() * 10) + 1)+  "<img src='png/glyphicons-345-thumbs-down.png'>  "+Math.floor((Math.random() * 10) + 1)+" <hr>";
+					}
+					
+					});
+					
+					
+					document.getElementById("listDiv").innerHTML = contentList;
+}
+
+function action_add_post(){
+
+	//Add posts and comments
+	//Add div inside 
+	var contentList = "add contents";
+	document.getElementById("listDiv").innerHTML = contentList;
+	
+	
+}
+
+
+$(function() {
+
+   
+    $('a').click(function(e) {
+        // don't follow the link
+        e.preventDefault();
+       
+        // get the current link and the data-notifications attr
+        //var link = $(this),
+        //    count = link.attr('data-notifications');
+        // make sure the count is a number
+        //if( typeof count === 'undefined' )
+        //    count = 0;
+        // update the attribute with a higher count
+        // link.attr('data-notifications', ++count);
+		
+		
+
+    
+    
+    });
+    
+});</script>
+</body>

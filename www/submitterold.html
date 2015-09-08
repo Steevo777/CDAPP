@@ -1,0 +1,163 @@
+</p>
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width">
+<html lang="en">
+<head>
+<link rel="stylesheet" type="text/css" href="bootstrap.css">
+</head>
+<body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="js/jquery.serializejson.js"></script>
+
+
+<script>
+$(document).ready(function(){
+
+	// Variable to store your files
+	var files;
+	//adb forward tcp:9222 localabstract:chrome_devtools_remote 
+	// Add events
+	$('input[type=file]').on('change', prepareUpload);
+	
+	
+
+
+
+	$.fn.setNow = function (onlyBlank) {
+	  var now = new Date($.now())
+	    , year
+	    , month
+	    , date
+	    , hours
+	    , minutes
+	    , seconds
+	    , formattedDateTime
+	    ;
+
+	  year = now.getFullYear();
+	  month = now.getMonth().toString().length === 1 ? '0' + (now.getMonth() + 1).toString() : now.getMonth() + 1;
+	  date = now.getDate().toString().length === 1 ? '0' + (now.getDate()).toString() : now.getDate();
+	  hours = now.getHours().toString().length === 1 ? '0' + now.getHours().toString() : now.getHours();
+	  minutes = now.getMinutes().toString().length === 1 ? '0' + now.getMinutes().toString() : now.getMinutes();
+	  seconds = now.getSeconds().toString().length === 1 ? '0' + now.getSeconds().toString() : now.getSeconds();
+	
+	  formattedDateTime = year + '-' + month + '-' + date + 'T' + hours + ':' + minutes + ':' + seconds;
+	
+	  if ( onlyBlank === true && $(this).val() ) {
+	    return this;
+	  }
+
+	  $(this).val(formattedDateTime);
+	
+	  return this;
+	}
+
+	$(function () {
+	    // Handler for .ready() called.
+	    $('input[type="datetime-local"]').setNow();
+	
+	});
+	    
+	/*$( '#simplepost' ).click( function( e ) {
+    $.ajax( {
+      url: 'http://www.a-information.com/chatdawg/submithndlr.php',
+      type: 'POST',
+      data: new FormData(this),
+      crossDomain: true,
+      processData: false,
+      contentType: false,
+    } );
+    e.preventDefault();
+  	} );
+  
+	*/
+	
+	// Grab the files and set them to our variable
+	function prepareUpload(event)
+	{
+		files = event.target.files;
+	}
+	
+	
+	$("#simplepost").click(function(event)
+	{
+	
+	
+	
+	//function submitForm(event, data)
+	//{
+	    // Create a jQuery object from the form
+	    //$form = $(event.target);
+	    //data = $(this).serialize() + "&" + $.param(data);
+	
+	    // Serialize the form data
+	    //var formData = $form.serialize();
+	    //var formData = new FormData();
+
+		//formData.append("post", "Groucho");
+		//formData.append("date", "123456"); 
+		
+		//var ft=$('#file_upload')[0].files[0];
+		//var ft = document.getElementById("file_upload").files[0];
+		//formData.append("file_upload", ft);
+			    
+	 	var formData = $("#ajaxform").serializeJSON();
+	 	
+	 	formData = formData + '&filenames[]=' + document.getElementById("file_upload").files[0];
+	 
+	 	//$.each(files, function(key, value)
+	    //{
+	    //    formData = formData + '&filenames[]=' + value;
+	    //});
+	 
+	 
+	 
+	 $.ajax(
+	 {
+	 url : "http://www.a-information.com/chatdawg/submithndlr.php",
+	 type: "POST",
+	 crossDomain: true, // enable this
+	 data : formData,
+	 success: function(response){
+	        alert("Thanks");
+	    },
+	 error: function(jqXHR, textStatus, errorThrown)
+	 {
+	 }
+	 });
+	 event.preventDefault(); //STOP default action
+	
+	});
+});
+</script>
+</body>
+<div id="message"> </div>
+    
+<form name="ajaxform" id="ajaxform" action="" method="post" class="bootstrap" >
+    <h1>Add Chat
+        <span>What's going on</span>
+    </h1>
+    <label>
+        <span>Chat: </span>
+        <input type="text" id="post" name="post" placeholder="Update" />
+    </label>
+    
+    <label>
+        <span>Expire Date: </span>
+        <input type="datetime-local" name="date"  /> <br/>
+    </label>
+    
+    <label>
+        <span>File: </span>
+    <input id="file_upload" type="file" name="file_upload" accept="image/*;capture=camera" multiple></input>   
+     
+    <label>
+        <span>&nbsp;</span> 
+        <input type="button" class="button" id="simplepost" value="Send"   >
+    </label>
+     
+    
+        
+</form>
+
+

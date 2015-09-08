@@ -1,0 +1,924 @@
+<meta name="viewport" content="width=device-width">
+<html lang="en">
+<head>
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+<title>ChatDawg</title>
+<meta http-equiv="Cache-Control" content="no-cache" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+
+
+<style media="screen" type="text/css">
+body {
+    margin: 20px 20px;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+}
+
+p { padding-bottom: 30px; }
+
+li {
+    margin-bottom: 10px;
+}
+
+.button {
+    display: inline-block;
+    text-decoration: none;
+    padding: 5px 10px;
+}
+
+[data-notifications] {
+    position: relative;
+}
+
+[data-notifications]:after {
+    content: attr(data-notifications);
+    position: absolute;
+    background: blue;
+    border-radius: 50%;
+    display: inline-block;
+    padding: 0.3em;
+    color: #f2f2f2;
+    right: -10px;
+    top: -10px;
+}
+
+</style>
+<link href="css/signin.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/bootstrapChat.css">
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<!--<script src="js/ie10-viewport-bug-workaround.js"></script> -->
+<script src="js/jquery-2.1.1.min.js"></script>
+<script src="js/jquery.serializejson.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/fleupld.js"></script>
+<script src="js/csl.js"></script>
+<script src="js/usr.js"></script>
+
+
+
+</head>
+<body>
+<header>
+    <div class="navbar navbar-static-top navbar-default">
+        <div class="navbar-header">
+        	<ul class="nav nav-tabs">
+            	<li><a class="button" id="world" href="#" data-toggle="tab" onclick="getList('world')"><span class="glyphicon glyphicon-globe" style="color:blue"></span><span class="badge" id="worldspan"></span></a></li>
+	     		<li><a class="button" id="family" href="#" onclick="getList('family')"><img src="png/glyphicons-25-parents.png"><span class="badge" id="familyspan"></span></a></li>
+	     		<li><a class="button" id="friends" href="#" onclick="getList('friends')"><img src="png/glyphicons-4-user.png"><span class="badge" id="friendsspan"></span></a></li>
+	     		<li><a class="button" id="party" href="#" onclick="getList('party')"><img src="png/glyphicons-275-beer.png"><span class="badge" id="partyspan"></span></a></li>
+	     		<li><a class="button" id="private" href="#" onclick="getNotifi('private')"><img src="png/glyphicons-246-chat.png"><span class="badge" id="privatespan"></span></a></li>
+             	<li><a class="button" id="add" href="#" onclick="add_action_post()"><img src="png/glyphicons-433-plus.png"><span class="badge" id="privatespan"></span></a></li>
+                <li><a class="button" id="login" href="#" onclick="action_login()"><img src="png/glyphicons-387-log-in.png"><span class="badge" id="privatespan"></span></a></li>
+            	<li><a class="button" id="usrCentralLnk" href="#" ><img src="png/glyphicons-205-unlock.png"><span class="badge" id="privatespan"></span></a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<div class="container-fluid no-padding">
+	<div id="username_div" class="container-fluid text-center"></div>
+	<div id="listOrder_div" class="container-fluid text-center">
+		<a class="button" id="slideMbtn" href="#" onclick="action_slideM()"><img src="png/glyphicons-9-film.png"></a>
+    	<a class="button" id="listMbtn" href="#" onclick="action_listM()"><img src="png/glyphicons-115-list.png"></a>
+   		<a class="button" id="smileListMbtn" href="#" ><img src="png/smile.png"></a>
+   		<a class="button" id="mostViewedlistMbtn" href="#" onclick="action_mostViewedlistM()"><img src="png/glyphicons-499-sunglasses.png"></a>
+   	</div> 
+   	<div id="usrlistOrder_div" class="container-fluid-hide text-center">
+		<a class="button" id="usrCanSeeMebtn" href="#" href="#" >Can See Me<img src="png/glyphicons-44-group.png"></a>
+    	<a class="button" id="usrICanSeebtn" href="#" href="#" >I Can See<img src="png/glyphicons-4-user.png"></a>
+   	</div> 
+	
+	
+	<div id="upload_spinner" class="container-fluid no-padding"></div>
+	<div id="list_header_div" class="container-fluid text-center"></div>
+	<div id="hdCarousel" class="carousel slide" data-ride="carousel"></div>
+	<div id="login_user_div" class="container-fluid-hide no-padding">
+      <form class="form-signin" name="login_user_form" id="login_user_form" enctype="multipart/form-data" action="#" method="post" >
+        <a href="#" id="href_create_user" onclick="create_user_click()">Create user account</a>
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Password" required>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" id="login_user_btn" name="login_user_btn">Sign in</button>
+      </form>
+    </div>
+
+
+
+	<div id="add_post_div" class="container-fluid-hide no-padding">
+		
+  		<div id="upload_progess" class="container-fluid-hide no-padding">
+  		  <h2>Uploading</h2>
+		    <div class="progress">
+    			<div id="upload_file_progress_bar" class="progress-bar" style="width: 0%;">
+        		0%
+    			</div>
+			</div>
+		</div>
+		
+		
+		<form name="add_post_form" id="add_post_form" enctype="multipart/form-data" action="#" method="post" class="bootstrap">
+		    <h1>Add Chat
+		    	<span>What's going on <input class="button green" id="Cancel" name="Cancel" value="X" onclick="cancel_add_action_post()" style="width: 97px; "></span> 
+			</h1>
+		    <div class="form-group">
+		      	<label for="chat">Chat:</label>
+		      	<textarea name="name" cols="40" rows="3" class="form-control" placeholder="Type convo here"></textarea>
+		    	<!--<input type="text" name="name" id="name" class="form-control" placeholder="Type convo here" multiple>-->
+		    </div>
+		    <div class="form-group">
+		      	<label for="type">Who? </label>
+		  		<select name="type" class="selectpicker">
+			   	<option value="W">World</option>
+			   	<option value="A">Family</option>
+			   	<option value="F">Friends</option>
+			   	<option value="P">Party</option>			
+				</select>
+		    </div>
+		    <div class="form-group">
+		      <input type="file" name="file_upload" id="file_upload" accept="image/*;capture=camera" multiple>
+		    </div>
+		    <input class="button green" type="submit" id="add_post_btn" name="add_post_btn" value="Send">
+	    </form>
+	</div>  
+	
+	<div id="create_user_div" class="container-fluid-hide no-padding">
+		<form id="create_user_form" name="create_user_form" class="form-signin" enctype="multipart/form-data" action="#" method="post" >
+	        
+	        <h2 class="form-signin-heading">Create Your User Account</h2>
+	        <div id="form_group">
+	        <label for="add_email" class="sr-only">Email address</label>
+	        	<input type="email" name="add_email" id="add_email" class="form-control" placeholder="Email address" required autofocus>
+	        <label for="add_pwd" class="sr-only">Password</label>
+	        	<input type="password" name="add_pwd" id="add_pwd" class="form-control" placeholder="Password" required autofocus>
+	        <label for="add_conpwd" class="sr-only">Confirm Password</label>
+		        <input type="password" name="add_conpwd" id="add_conpwd" class="form-control" placeholder="Confirm Password" required>
+		    <label for="add_username" class="sr-only">Username*</label>
+	        	<input type="text" name="add_username" id="add_username" class="form-control" placeholder="Username" required autofocus>
+	        	<h5>*Please do NOT use your real name as your username. Username examples: SurferDude, Lucky, Sunshine.  This is a private 
+	        	forum between members.  Information is stored encrypted to keep it private.</h5>
+	        </div>
+	        <br>
+	        <button class="btn btn-lg btn-primary btn-block" id="create_user_btn" name="create_user_btn" type="submit">Create</button>
+	     </form>
+	</div>        
+
+	<div id="welcome_user_div" class="container-fluid-hide no-padding">
+	</div>
+    
+    <div id="user_list_div" class="container-fluid no-padding">
+	</div>
+
+	<div id="list_div" class="tab-pane container-fluid no-padding">
+	</div>
+	<div id="list_votes_div" class="container-fluid no-padding">
+	</div> 
+
+</div>
+
+
+<script>
+
+//username = 'Superman';
+username = store('usrvld');
+usrid = store('usrid');
+doCounts(usrid);
+
+
+
+function doCounts(userid) {
+		
+		
+		username = store('usrvld');
+		document.getElementById("username_div").innerHTML = username;
+		usrid = store('usrid');
+		formData = 'usid='+usrid;
+		formData = formData + '&usrid='+usrid;
+		
+		var jsonData = $.ajax({
+			url: "http://www.a-information.com/chatdawg/totalcounts.php?usid="+usrid,
+			type: 'POST',
+			dataType:'json',
+			data: formData,
+			async: false
+			}).responseText;
+			
+		jsonData = JSON.parse(jsonData);
+		
+		if (jsonData){
+			document.getElementById("worldspan").innerHTML = jsonData['worldcount'];
+			document.getElementById("familyspan").innerHTML = jsonData['familycount'];
+			document.getElementById("friendsspan").innerHTML = jsonData['friendscount'];
+			document.getElementById("partyspan").innerHTML = jsonData['partycount'];
+			document.getElementById("privatespan").innerHTML = jsonData['privatecount'];
+		}
+			
+		/*$.each(jsonData, function(i,item){
+		// Create our data table out of JSON data loaded from server.
+		document.getElementById("worldspan").innerHTML = item.worldcount;
+		document.getElementById("familyspan").innerHTML = item.familycount;
+		document.getElementById("friendsspan").innerHTML = item.friendscount;
+		document.getElementById("partyspan").innerHTML = item.partycount;
+		document.getElementById("privatespan").innerHTML = item.privatecount;
+		});*/
+}
+  
+function getList(type){
+		
+		//Close add div
+		close_all_divs();
+		
+		var link = $(this),
+        	button = link.attr('id');
+        	
+        var username = store('usrvld');
+		var usrid = store('usrid');
+		
+		
+		
+		formData = 'usrid='+usrid+'&usid='+username+'&SK=300'+'&LT=20';
+		
+		var jsonData = $.ajax({
+			url: "http://www.a-information.com/chatdawg/"+type+"posts.php",
+			type: 'POST',
+			dataType:'json',
+			data: formData,
+			async: false
+			}).responseText;
+		
+				
+				var groupcolor = "#0000FF";
+				switch (type)
+					{
+					    case "world":
+					        {groupcolor="#F3F8F4";}
+					        break;
+					    case "family":
+					        {groupcolor="#E9F1EA";}
+					        break;
+					    case "friends":
+					        {groupcolor="#EAF1FB";}
+					        break;
+					    case "party":
+					        {groupcolor="#F7F5FE";}
+					        break;
+					    case "private":
+					        {groupcolor="#AA00FF";}
+					        break;
+					    default:
+					        {groupcolor="#DD00FF";}
+					        break;
+					}
+				
+				document.getElementById(type).style ="background-color: "+groupcolor;
+								
+				var contentList = "";
+				
+				
+				jsonData = JSON.parse(jsonData);
+				$.each(jsonData, function(i,item){
+					
+                    var dateDay = "";
+                    if (item.date)
+                    {
+                        dateFc=new Date(item.date);
+                        //Assemble date
+                        var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+                        var months = ["Jan","Feb","March","April","May","June","July","Aug","Sept","Oct","Nov","Dec"];
+					    dateDay = days[dateFc.getDay()] + "  " + months[dateFc.getMonth()] + ", " + dateFc.getDate(); 
+                    } 
+                    
+                    
+					contentList += "<div class='container-fluid no-padding'  style='background-color: "+groupcolor+"'><div class='row'>";
+				
+					//No pic
+					if (item.postpictureID == null)
+					{
+					contentList += "<b class=>" +item.postuser + "</b>&nbsp;&nbsp;"+ dateDay+" <br>" + item.post + "<br><br>"+" "+date+"<br> &nbsp;&nbsp;&nbsp;&nbsp; <img src='png/glyphicons-499-sunglasses.png'> "+item.views+" &nbsp;&nbsp;&nbsp;&nbsp; <a href='#' id='hvs"+item.postid+"' class='button'><img src='png/smile.png' id='ivs"+item.postid+"'><p5 id='pvs"+item.postid+"'>" +item.smile+  "</p></a><a href='#' id='hvf"+item.postid+"' class='button'><img src='png/frown.png' id='ivf"+item.postid+"'>" +item.frown+  "</a><a href='#' id='hva"+item.postid+"' class='button'><img src='png/sad.png' id='iva"+item.postid+"'>" +item.sad+  "</a><a href='#' id='hvi"+item.postid+"' class='button'><img src='png/glyphicons-196-circle-info.png' id='iii"+item.postid+"'></a> <hr>";
+					}
+					else if (item.linkedpost != null)
+					{
+					contentList += "<b>" +item.postuser + "</b>&nbsp;&nbsp;"+dateDay+" <br>" + item.post + "<br><img src='"+item.linkedpost +"' class='img-responsive'><br><br>  "+" "+item.date+"<br> &nbsp;&nbsp;&nbsp;&nbsp; <img src='png/glyphicons-499-sunglasses.png'>"+item.views+" &nbsp;&nbsp;&nbsp;&nbsp; <a href='#' id='hvs"+item.postid+"' class='button'><img src='png/smile.png' id='ivs"+item.postid+"'><p5 id='pvs"+item.postid+"'>" +item.smile+  "</p></a><a href='#' id='hvf"+item.postid+"' class='button'><img src='png/frown.png' id='ivf"+item.postid+"'><p5 id='pvf"+item.postid+"'>" +item.frown+  "</p></a><a href='#' id='hva"+item.postid+"' class='button'><img src='png/sad.png' id='iva"+item.postid+"'><p5 id='pva"+item.postid+"'>" +item.sad+  "</p></a><a href='#' id='hvi"+item.postid+"' class='button'><img src='png/glyphicons-196-circle-info.png' id='iii"+item.postid+"'></a> <hr>";
+					}
+					else 
+					{
+					contentList += "<b>" +item.postuser + "</b>&nbsp;&nbsp;"+dateDay+" <br>" + item.post + "<br><img src='http://www.a-information.com/chatdawg/fups/"+item.postpictureID +"' class='img-responsive'><br>&nbsp;&nbsp;&nbsp;&nbsp; <img src='png/glyphicons-499-sunglasses.png'>"+item.views+" &nbsp;&nbsp;&nbsp;&nbsp; <a href='#' id='hvs"+item.postid+"' class='button'><img src='png/smile.png' id='ivs"+item.postid+"'><p5 id='pvs"+item.postid+"'>" +item.smile+  "</p></a><a href='#' id='hvf"+item.postid+"' class='button'><img src='png/frown.png' id='ivf"+item.postid+"'><p5 id='pvf"+item.postid+"'>" +item.frown+  "</p></a><a href='#' id='hva"+item.postid+"' class='button'><img src='png/sad.png' id='iva"+item.postid+"'><p5 id='pva"+item.postid+"'>" +item.sad+  "</p></a><a href='#' id='hvi"+item.postid+"' class='button'><img src='png/glyphicons-196-circle-info.png' id='iii"+item.postid+"'></a> <hr>";;
+					}
+					
+					contentList += "</div></div>"
+					
+					});
+					buildCarousel(jsonData);
+					document.getElementById("hdCarousel").innerHTML = buildCarousel(jsonData);
+					document.getElementById("list_div").innerHTML = contentList;
+					document.getElementById("list_header_div").innerHTML = type;
+					doCounts(usrid);
+					$('#listOrder_div').show();	
+					$('#list_div').show();
+}
+
+function getNotifi(type){
+		
+		//Close add div
+		close_all_divs();
+		
+		var link = $(this),
+        	button = link.attr('id');
+        	
+        var username = store('usrvld');
+		var usrid = store('usrid');
+		
+		
+		
+		formData = 'usrid='+usrid+'&usid='+username;
+		
+		var jsonData = $.ajax({
+			url: "http://www.a-information.com/chatdawg/privateposts.php",
+			type: 'POST',
+			dataType:'json',
+			data: formData,
+			async: false
+			}).responseText;
+		
+				
+				var groupcolor = "#0000FF";
+				switch (type)
+					{
+					    case "world":
+					        {groupcolor="#F3F8F4";}
+					        break;
+					    case "family":
+					        {groupcolor="#E9F1EA";}
+					        break;
+					    case "friends":
+					        {groupcolor="#EAF1FB";}
+					        break;
+					    case "party":
+					        {groupcolor="#F7F5FE";}
+					        break;
+					    case "private":
+					        {groupcolor="#AA00FF";}
+					        break;
+					    default:
+					        {groupcolor="#DD00FF";}
+					        break;
+					}
+				
+				document.getElementById(type).style ="background-color: "+groupcolor;
+								
+				var contentList = "";
+				
+				
+				jsonData = JSON.parse(jsonData);
+				$.each(jsonData, function(i,item){
+					
+					contentList += "<div class='container-fluid no-padding'  style='background-color: "+groupcolor+"'><div class='row'>";
+				
+					//family
+					if (item.type == 'reqa')
+					{
+					contentList += "<b class=>" +item.postuser + "</b>" + item.post + "<br><br>"+" "+item.date+"<br><a href='#' id='hapa"+item.allowUserId+"' class='button'><img src='png/glyphicons-7-user-add.png' id='iapa"+item.allowUserId+"'></a><a href='#' id='hadf"+item.allowUserId+"' class='button'><img src='png/glyphicons-8-user-remove.png' id='iada"+item.allowUserId+"'></a><hr>";
+					}
+					
+					//friends
+					if (item.type == 'reqf')
+					{
+					contentList += "<b class=>" +item.postuser + "</b>" + item.post + "<br><br>"+" "+item.date+"<br><a href='#' id='hapf"+item.allowUserId+"' class='button'><img src='png/glyphicons-7-user-add.png' id='iapf"+item.allowUserId+"'></a><a href='#' id='hadf"+item.allowUserId+"' class='button'><img src='png/glyphicons-8-user-remove.png' id='iadf"+item.allowUserId+"'></a><hr>";
+					}
+					
+					//party	
+					if (item.type == 'reqp') 
+					{
+					contentList += "<b class=>" +item.postuser + "</b>" + item.post + "<br><br>"+" "+item.date+"<br><a href='#' id='happ"+item.allowUserId+"' class='button'><img src='png/glyphicons-7-user-add.png' id='iapp"+item.allowUserId+"'></a><a href='#' id='hadp"+item.allowUserId+"' class='button'><img src='png/glyphicons-8-user-remove.png' id='iadp"+item.allowUserId+"'></a><hr>";
+					}
+					
+					
+					
+					
+					
+					
+							if (item.type == 'aprr')
+					{
+					contentList += "<b class=>" +item.postuser + "</b>" + item.post + "<br><br>"+" "+item.date+"<br><a href='#' id='hapf"+item.postid+"' class='button'><img src='png/glyphicons-7-user-add.png' id='iapf"+item.postid+"'></a><a href='#' id='hadf"+item.postid+"' class='button'><img src='png/glyphicons-8-user-remove.png' id='iadf"+item.postid+"'></a><hr>";
+					}
+			
+			
+					if (item.type == 'aprp')
+					{
+					contentList += "<b class=>" +item.postuser + "</b>" + item.post + "<br><br>"+" "+item.date+"<br><a href='#' id='hapf"+item.postid+"' class='button'><img src='png/glyphicons-7-user-add.png' id='iapf"+item.postid+"'></a><a href='#' id='hadf"+item.postid+"' class='button'><img src='png/glyphicons-8-user-remove.png' id='iadf"+item.postid+"'></a><hr>";
+					}
+			
+					/*if (item.linkedpost != null)
+					{
+					contentList += "<b>" +item.postuser + "</b><br>" + item.post + "<br><img src='"+item.linkedpost +"' class='img-responsive'><br><br>  "+" "+item.date+"<br> &nbsp;&nbsp;&nbsp;&nbsp; <img src='png/glyphicons-499-sunglasses.png'>"+item.viewed+" &nbsp;&nbsp;&nbsp;&nbsp; <a href='#' id='hs"+item.postid+"' class='button'><img src='png/smile.png' id='vs"+item.postid+"'>" +item.smile+  "</a><a href='#' id='hf"+item.postid+"' class='button'><img src='png/frown.png' id='vf"+item.postid+"'>" +item.frown+  "</a><a href='#' id='ha"+item.postid+"' class='button'><img src='png/sad.png' id='va"+item.postid+"'>" +item.sad+ "</a><a href='#' id='hi"+item.postid+"' class='button'><img src='png/glyphicons-196-circle-info.png' id='vi"+item.postid+"'></a> <hr>";
+					}
+					if (item.linkedpost != null)
+					{
+					contentList += "<b>" +item.postuser + "</b><br>" + item.post + "<br><img src='http://www.a-information.com/chatdawg/fups/"+item.postpictureID +"' class='img-responsive'><br><br>  "+" "+item.date+"<br> &nbsp;&nbsp;&nbsp;&nbsp; <img src='png/glyphicons-499-sunglasses.png'>"+item.viewed+" &nbsp;&nbsp;&nbsp;&nbsp; <a href='#' id='hs"+item.postid+"' class='button'><img src='png/smile.png' id='vs"+item.postid+"'>" +item.smile+  "</a><a href='#' id='hf"+item.postid+"' class='button'><img src='png/frown.png' id='vf"+item.postid+"'>" +item.frown+  "</a><a href='#' id='ha"+item.postid+"' class='button'><img src='png/sad.png' id='va"+item.postid+"'>" +item.sad+ "</a><a href='#' id='hi"+item.postid+"' class='button'><img src='png/glyphicons-196-circle-info.png' id='vi"+item.postid+"'></a> <hr>";;
+					} */
+					
+					contentList += "</div></div>"
+					
+					});
+					document.getElementById("list_div").innerHTML = contentList;
+					document.getElementById("list_header_div").innerHTML = type;
+					$('#listOrder_div').hide();	
+					$('#list_div').show();
+}
+
+
+$('#smileListMbtn').on( "click", function(e) {
+		
+		//Close add div
+		close_all_divs();
+		
+		var link = $(this),
+        	button = link.attr('id');
+        	
+        var username = store('usrvld');
+		var usrid = store('usrid');
+		
+		formData = 'usrid='+usrid+'&usid='+username;
+		
+		var jsonData = $.ajax({
+			url: "http://www.a-information.com/chatdawg/popularposts.php",
+			type: 'POST',
+			dataType:'json',
+			data: formData,
+			async: false
+			}).responseText;
+		
+				type = 'party'; 
+				var groupcolor = "#779ECB";
+				document.getElementById(type).style ="background-color: "+groupcolor;
+								
+				var contentList = "";
+				
+				
+				jsonData = JSON.parse(jsonData);
+				$.each(jsonData, function(i,item){
+					
+					contentList += "<div class='container-fluid no-padding'  style='background-color: "+groupcolor+"'><div class='row'>";
+				
+					//No pic
+					if (item.postpictureID == null)
+					{
+					contentList += "<b class=>" +item.postuser + "</b><br>" + item.post + "<br><br>"+" "+item.date+"<br> &nbsp;&nbsp;&nbsp;&nbsp; <img src='png/glyphicons-499-sunglasses.png'> "+item.viewed+" &nbsp;&nbsp;&nbsp;&nbsp; <a href='#' id='hs"+item.postid+"' class='button'><img src='png/smile.png' id='vs"+item.postid+"'>" +item.smile+  "</a><a href='#' id='hf"+item.postid+"' class='button'><img src='png/frown.png' id='vf"+item.postid+"'>" +item.frown+  "</a><a href='#' id='ha"+item.postid+"' class='button'><img src='png/sad.png' id='va"+item.postid+"'>" +item.sad+  "</a> <hr>";
+					}
+					else if (item.linkedpost != null)
+					{
+					contentList += "<b>" +item.postuser + "</b><br>" + item.post + "<br><img src='"+item.linkedpost +"' class='img-responsive'><br><br>  "+" "+item.date+"<br> &nbsp;&nbsp;&nbsp;&nbsp; <img src='png/glyphicons-499-sunglasses.png'>"+item.viewed+" &nbsp;&nbsp;&nbsp;&nbsp; <a href='#' id='hs"+item.postid+"' class='button'><img src='png/smile.png' id='vs"+item.postid+"'>" +item.smile+  "</a><a href='#' id='hf"+item.postid+"' class='button'><img src='png/frown.png' id='vf"+item.postid+"'>" +item.frown+  "</a><a href='#' id='ha"+item.postid+"' class='button'><img src='png/sad.png' id='va"+item.postid+"'>" +item.sad+  "</a><hr>";
+					}
+					else 
+					{
+					contentList += "<b>" +item.postuser + "</b><br>" + item.post + "<br><img src='http://www.a-information.com/chatdawg/fups/"+item.postpictureID +"' class='img-responsive'><br><br>  "+" "+item.date+ "<br> &nbsp;&nbsp;&nbsp;&nbsp; <img src='png/glyphicons-499-sunglasses.png'>"+item.viewed+" &nbsp;&nbsp;&nbsp;&nbsp; <a href='#' id='hs"+item.postid+"' class='button'><img src='png/smile.png' id='vs"+item.postid+"'>" +item.smile+  "</a><a href='#' id='hf"+item.postid+"' class='button'><img src='png/frown.png' id='vf"+item.postid+"'>" +item.frown+  "</a><a href='#' id='ha"+item.postid+"' class='button'><img src='png/sad.png' id='va"+item.postid+"'>" +item.sad+  "</a><hr>";
+					}
+					
+					contentList += "</div><div id='list_endDiv'></div></div>"
+					
+					});
+					buildCarousel(jsonData);
+					document.getElementById("hdCarousel").innerHTML = buildCarousel(jsonData);
+					document.getElementById("list_div").innerHTML = contentList;
+					document.getElementById("list_header_div").innerHTML = type;
+					$('#listOrder_div').hide();	
+					$('#list_div').show();
+});
+
+function getVotes(postid){
+		
+		//Close add div
+		close_all_divs();
+		
+		//var link = $(this),
+        //	button = link.attr('id');
+       
+       	//var postid = substring.button(4);
+   		formData = 'postid='+postid;
+		
+		var jsonData = $.ajax({
+			url: "http://www.a-information.com/chatdawg/getvotesnames.php",
+			type: 'POST',
+			dataType:'json',
+			data: formData,
+			async: false
+			}).responseText;
+		
+				type = 'party'; 
+				var groupcolor = "#779ECB";
+				document.getElementById(type).style ="background-color: "+groupcolor;
+								
+				var contentList = "";
+				
+				
+				jsonData = JSON.parse(jsonData);
+					
+					contentList += "<div class='container-fluid no-padding'  style='background-color: "+groupcolor+"'><div class='row'>";
+					
+					contentList += "<div class='row'>";
+					contentList += "<div id='smilesVotesDiv'><img src='png/smile.png' id='votesSmiles'><br>";
+					
+					$.each(jsonData, function(i,item){
+					if (item.vote == 's')
+					{ 
+					contentList += "<b class=>" +item.username + "</b><br>";
+					}
+					});
+					contentList += "<hr></div></div>"
+				
+					contentList += "<div class='row'>";
+					contentList += "<div id='frownVotesDiv'><img src='png/frown.png' id='votesFrown'><br>";
+					
+					$.each(jsonData, function(i,item){
+					if (item.vote == 'f')
+					{ 
+					contentList += "<b class=>" +item.username + "</b><br>";
+					}
+					});
+					contentList += "<hr></div></div>"
+					
+					contentList += "<div class='row'>";
+					contentList += "<div id='sadVotesDiv'><img src='png/sad.png' id='votesSad'><br>";
+					
+					$.each(jsonData, function(i,item){
+					if (item.vote == 'f')
+					{ 
+					contentList += "<b class=>" +item.username + "</b><br>";
+					}
+					});
+					
+					contentList += "<hr></div></div>"
+					formData = 'postid='+postid;
+		
+		var jsonData = $.ajax({
+			url: "http://www.a-information.com/chatdawg/getviewnames.php",
+			type: 'POST',
+			dataType:'json',
+			data: formData,
+			async: false
+			}).responseText;
+		
+				
+				jsonData = JSON.parse(jsonData);
+					
+					contentList += "<div class='row'>";
+					contentList += "<div id='viewsDiv'><img src='png/glyphicons-499-sunglasses.png' id='viewsSung'><br>";
+				
+					$.each(jsonData, function(i,item){
+					contentList += "<b class=>" +item.username + "</b><br>";
+					});
+				
+					contentList += "<hr></div></div>"
+					contentList += "</div></div>"
+					
+					
+					document.getElementById("list_votes_div").innerHTML = contentList;
+					$('#listOrder_div').hide();	
+					$('#list_votes_div').show();
+}
+
+
+function action_slideM(){
+	$('#login_user_div').hide();
+	$('#add_post_div').hide();
+	$('#create_user_div').hide();
+	$('#list_div').hide();
+	$('#welcome_user_div').hide();
+	$('#hdCarousel').show();
+	$('#list_header_div').hide();
+	$('#list_votes_div').hide();
+	$('#usrlistOrder_div').hide();
+	
+}
+
+function action_listM(){
+	$('#login_user_div').hide();
+	$('#add_post_div').hide();
+	$('#create_user_div').hide();
+	$('#list_div').show();
+	$('#welcome_user_div').hide();
+	$('#hdCarousel').hide();
+	$('#list_header_div').hide();
+}
+
+function close_all_divs(){
+	$('#login_user_div').hide();
+	$('#add_post_div').hide();
+	$('#create_user_div').hide();
+	$('#list_div').hide();
+	$('#welcome_user_div').hide();
+	$('#hdCarousel').hide();
+	$('#list_header_div').hide();
+	$('#user_list_div').hide();
+	$('#listOrder_div').hide();
+	$('#list_votes_div').hide();
+	$('#usrlistOrder_div').hide();
+}
+
+function add_action_post(){
+	close_all_divs();
+	$('#add_post_div').show();
+}
+
+function cancel_add_action_post(){
+	$('#add_post_div').hide();
+}
+
+function create_user_click(){
+	close_all_divs();
+	$('#create_user_div').show();
+}
+
+
+function action_create_user()
+	{/*
+	  // Create a jQuery object from the form
+	  $form = $(event.target);
+		
+		// Serialize the form data
+		var formData = $form.serialize();
+		
+		// You should sterilise the file names
+		$.each(data.files, function(key, value)
+		{
+			formData = formData + '&filename=' + value;
+		});
+	
+	    $.ajax({
+	        url: 'http://www.a-information.com/chatdawg/crusd.php',
+	        type: 'POST',
+	        data: formData,
+	        cache: false,
+	        dataType: 'json',
+	        success: function(data, textStatus, jqXHR)
+	        {
+	            if(typeof data.error === 'undefined')
+	            {
+	                // Success so call function to process the form
+	                alert('SUCCESS: ' + data.success);
+	                alert('SUCCESS: ' + data.formData);
+	                
+	            }
+	            else
+	            {
+	                // Handle errors here
+	                console.log('ERRORS: ' + data.error);
+	            }
+	        },
+	        error: function(jqXHR, textStatus, errorThrown)
+	        {
+	            // Handle errors here
+	            console.log('ERRORS: ' + textStatus);
+	        },
+	        complete: function()
+	        {
+	         	// STOP LOADING SPINNER
+            }
+		});
+*/}
+	
+
+
+
+function cancel_create_user_click(){
+	$('#create_user_div').hide();
+}
+
+
+function action_login(){
+	close_all_divs();
+	$('#login_user_div').show();
+	//window.location.replace("http://www.a-information.com/chatdawg/postupld.html");
+}
+
+function cancel_action_login(){
+	$('#login_user_div').hide();
+}
+
+function action_usersCentral(){
+	close_all_divs();
+}
+
+function buildCarousel(carouselData)
+	 {
+ 
+		contentCarousel = "";
+		jsonData = carouselData;
+		
+		//<!-- Indicators -->
+		contentCarousel =  '<ol class="carousel-indicators">';
+		$.each(jsonData, function(i,item){
+ 		  
+ 		  if (i==0)
+ 		  		{
+ 		  			contentCarousel += '<li data-target="#hdCarousel" data-slide-to="'+i+'" class="active"></li>';
+ 		  		}
+ 		  		else
+ 		  		{
+ 		  			contentCarousel += '<li data-target="#hdCarousel" data-slide-to="'+i+'"></li>';
+ 		  		}
+ 		  	//"<b>" +item.postuser + "</b><br>" + item.post + "<br><img src='http://www.a-information.com/chatdawg/fups/"+item.postpictureID +"' class='img-responsive'><br><br>  "+" "+item.date+"<br> &nbsp;&nbsp;&nbsp;&nbsp; <img src='png/glyphicons-499-sunglasses.png'>"+Math.floor((Math.random() * 10) + 1)+" &nbsp;&nbsp;&nbsp;&nbsp; <img src='png/glyphicons-344-thumbs-up.png'>  " +Math.floor((Math.random() * 10) + 1)+  "<img src='png/glyphicons-345-thumbs-down.png'>  "+Math.floor((Math.random() * 10) + 1)+" <hr>";
+					
+		});	
+        
+        contentCarousel += '</ol>';
+         /*<!-- Indicators -->
+		  <ol class="carousel-indicators">
+		    <li data-target="#hdCarousel" data-slide-to="0" class="active"></li>
+		    <li data-target="#hdCarousel" data-slide-to="1"></li>
+		    <li data-target="#hdCarousel" data-slide-to="2"></li>
+		    <li data-target="#hdCarousel" data-slide-to="3"></li>
+		  </ol>*/
+		
+		  
+		  //<!-- Wrapper for slides -->
+		  contentCarousel += '<div class="carousel-inner" role="listbox">';
+		  $.each(jsonData, function(i,item){
+ 		  	
+ 		  	if (i==0)
+ 		  		{
+ 		  			contentCarousel += '<div class="item active">'+
+		      		'<img src="http://www.a-information.com/chatdawg/fups/'+item.postpictureID+'" alt="Chania" class="img-responsive"> '+
+		    		'<div class="carousel-caption">'+
+                    	'<h1>'+item.postuser+'</h1>'+
+                    	'<p class="lead">'+ item.post +'</p>'+
+                	'</div>'+		
+		    		'</div>';
+		    	}
+		    	else
+		    	{
+		    		contentCarousel += '<div class="item">'+
+		      		'<img src="http://www.a-information.com/chatdawg/fups/'+item.postpictureID +'" alt="Chania" class="img-responsive"> '+
+		    		'<div class="carousel-caption left-caption text-left">'+
+                    	'<h1>'+item.postuser+'</h1>'+
+                    	'<p class="lead">'+ item.post +'</p>'+
+                	'</div>'+
+                	'</div>';
+		    	}
+		  	//"<b>" +item.postuser + "</b><br>" + item.post + "<br><img src='http://www.a-information.com/chatdawg/fups/"+item.postpictureID +"' class='img-responsive'><br><br>  "+" "+item.date+" &nbsp;&nbsp;&nbsp;&nbsp; <img src='png/glyphicons-499-sunglasses.png'>"+Math.floor((Math.random() * 10) + 1)+" &nbsp;&nbsp;&nbsp;&nbsp; <img src='png/glyphicons-344-thumbs-up.png'>  " +Math.floor((Math.random() * 10) + 1)+  "<img src='png/glyphicons-345-thumbs-down.png'>  "+Math.floor((Math.random() * 10) + 1)+" <hr>";
+					
+			});	
+		  
+		  	contentCarousel += '</div>';
+		  
+		    /*--- Div Image model
+		    <div class="item active">
+		      <img src="img_chania.jpg" alt="Chania">
+		    </div>
+		
+		    <div class="item">
+		      <img src="img_chania2.jpg" alt="Chania">
+		    </div>
+		  </div> 
+		  ---close image model*/
+		
+		contentCarousel += '<!-- Left and right controls -->'+
+		  '<a class="left carousel-control" href="#hdCarousel" role="button" data-slide="prev">'+
+		    '<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>'+
+		    '<span class="sr-only">Previous</span>'+
+		  '</a>'+
+		  '<a class="right carousel-control" href="#hdCarousel" role="button" data-slide="next">'+
+		    '<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>'+
+		    '<span class="sr-only">Next</span>'+
+		  '</a>';
+		  return contentCarousel;
+	}
+
+$('#list_div').on( "click", function(e) {
+    	//alert(e.target.id);
+	  	// Create a jQuery object from the form
+	  	usrid = store('usrid');
+	  	var targetClick=e.target.id;
+	  	
+		
+		if ((targetClick.substring(0,1) == 'h') || (targetClick.substring(0,1) == 'i') || (targetClick.substring(0,1) == 'p'))
+		{
+			
+			if (targetClick.substring(1,2) == 'i')
+			{
+				getVotes(targetClick.substring(3))
+			}
+			
+			//Votes 
+			if (targetClick.substring(1,2) == 'v')
+			{
+				// You should sterilise the file names
+				formData = 'usrid='+usrid+'&vote=' + targetClick.substring(2);
+				
+			    $.ajax({
+		        url: 'http://www.a-information.com/chatdawg/votehndlr.php',
+		        type: 'POST',
+		        data: formData,
+		        cache: false,
+		        dataType: 'json',
+		        success: function(data, textStatus, jqXHR)
+		        {
+		            if(typeof data.error === 'undefined')
+		            {
+		                // Success so call function to process the form
+		                //alert('SUCCESS: ' + data.success);
+		                //Increase ID count by +1
+		                paraId = "pv" + targetClick.substring(2);
+		                var currentVotes = document.getElementById(paraId).innerHTML;
+		                document.getElementById(paraId).innerHTML = parseInt(currentVotes,10) + 1;
+		           }
+		            else
+		            {
+		                // Handle errors here
+		                console.log('ERRORS: ' + data.error);
+		            }
+		        },
+		        error: function(jqXHR, textStatus, errorThrown)
+		        {
+		            // Handle errors here
+		            console.log('ERRORS: ' + textStatus);
+		        },
+		        complete: function()
+		        {
+		         	// STOP LOADING SPINNER
+	            }
+				});
+			}
+		    
+		    //hapf147
+			if (targetClick.substring(1,2) == 'a')
+			{
+				// You should sterilise the file names
+				formData = 'usrid='+usrid+'&req=' + targetClick.substring(1);
+				
+			    $.ajax({
+		        url: 'http://www.a-information.com/chatdawg/secudhndlr.php',
+		        type: 'POST',
+		        data: formData,
+		        cache: false,
+		        dataType: 'json',
+		        success: function(data, textStatus, jqXHR)
+		        {
+		            if(typeof data.error === 'undefined')
+		            {
+		                // Success so call function to process the form
+		                alert('SUCCESS: ' + data.success);
+		                //alert('Your account was successfully added for: ' + data.username);
+		            }
+		            else
+		            {
+		                // Handle errors here
+		                console.log('ERRORS: ' + data.error);
+		            }
+		        },
+		        error: function(jqXHR, textStatus, errorThrown)
+		        {
+		            // Handle errors here
+		            console.log('ERRORS: ' + textStatus);
+		        },
+		        complete: function()
+		        {
+		         	// STOP LOADING SPINNER
+	            }
+				});
+			}
+		}
+});
+
+$(window).scroll(function(){
+ 
+        //var wintop = $(window).scrollTop(), docheight = $(document).height(), winheight = $('#list_div').height();
+        //var  scrolltrigger = 9000;
+        
+        
+        //if  ((wintop+100) > winheight ) {
+         //console.log('scroll bottom');
+         //alert('end of scroll wintop'+wintop+'Doc H'+docheight+'doc '+winheight);
+        //}
+    });
+    
+
+ 
+
+</script>
+
+</body>
