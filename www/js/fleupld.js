@@ -213,7 +213,7 @@ $(function()
 	 		alert ("Resize completed transfer");
 	        var xhr = new XMLHttpRequest();
 	        xhr.onreadystatechange = function(ev){
-	        		alert ("Onready To Go");
+	        		alert ("Onready 2");
 	        		$('#upload_progess').show();
 	        		alert('Upload Status '+xhr.status+'  ReadyState'+xhr.readyState);
 	        		if (xhr.readyState==4 && xhr.status==200){
