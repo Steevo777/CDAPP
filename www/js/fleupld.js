@@ -107,7 +107,7 @@ $(function()
 	            {
 	                // Success so call function to process the form
 	                //alert('SUCCESS: ' + data.success);
-	                alert('SUCCESS: ' + data.formData);
+	                alert('SUCCESS DATA: ' + data.formData);
 	                $('#upload_progess').hide();
 	                close_all_divs();
 	                
@@ -116,7 +116,7 @@ $(function()
 	            else
 	            {
 	                // Handle errors here
-	                console.log('ERRORS: ' + data.error);
+	                console.log('ERRORS Data: ' + data.error);
 	            }
 	        },
 	        error: function(jqXHR, textStatus, errorThrown)
@@ -213,7 +213,7 @@ $(function()
 	 		alert ("Resize completed transfer");
 	        var xhr = new XMLHttpRequest();
 	        xhr.onreadystatechange = function(ev){
-	        		alert ("Onready");
+	        		alert ("Onready To Go");
 	        		$('#upload_progess').show();
 	        		alert('Upload Status '+xhr.status+'  ReadyState'+xhr.readyState);
 	        		if (xhr.readyState==4 && xhr.status==200){
