@@ -210,7 +210,7 @@ $(function()
 	        var dataURL = canvas.toDataURL("image/jpeg");
 	 
 	 
-	 		alert ("Resize completed transfer");
+	 		alert ("Resize "+canvas.width);
 	        var xhr = new XMLHttpRequest();
 	        xhr.onreadystatechange = function(ev){
 	        		alert ("Onready 2");
