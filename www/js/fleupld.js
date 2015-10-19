@@ -268,7 +268,6 @@ $(function()
 	        xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	        var data = 'image=' + dataURL;
 	        alert("before send");
-	        alert("data:"+data);
 	        xhr.send(data);
 	      }
 	 
