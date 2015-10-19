@@ -171,7 +171,7 @@ $(function()
 	    event.preventDefault(); // Totally stop stuff happening
 		
 		
-		alert ("Resize started");
+		alert ("Resize started Now");
 		var data = new FormData();
 	    $.each(files, function(key, value)
 	    {
