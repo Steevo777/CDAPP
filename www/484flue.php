@@ -5,6 +5,7 @@ if ($_POST) {
     $img = str_replace('data:image/jpeg;base64,', '', $img);
     $img = str_replace(' ', '+', $img);
     $data = base64_decode($img);
+    error_log($img);
     $unid = uniqid() . '.jpg';
     $file = UPLOAD_DIR . $unid;
     $success = file_put_contents($file, $data);
