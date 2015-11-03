@@ -273,6 +273,6 @@ $(function()
 	 
 	      alert ("ended send");		 
 	   }
-	   //reader.readAsDataURL(files[0]);
+	   reader.readAsDataURL(files[0]);
 }
 });
