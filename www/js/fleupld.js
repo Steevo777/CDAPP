@@ -208,7 +208,7 @@ $(function()
 	        var ctx = canvas.getContext("2d");
 	        ctx.drawImage(this, 0, 0, tempW, tempH);
 	        var dataURL = canvas.toDataURL("image/jpeg");
-	 
+	        
 	 
 	 		alert ("Resize "+canvas.width);
 	        var xhr = new XMLHttpRequest();
@@ -266,7 +266,7 @@ $(function()
 	        xhr.open('POST', 'http://www.a-information.com/chatdawg/484flue.php', true);
 	        alert("after post");
 	        xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-	        var data = 'image=' + dataURL;
+	        var data = ''; //'image=' + dataURL;
 	        alert("before send"+ dataURL);
 	        xhr.send(data);
 	      }
