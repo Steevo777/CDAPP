@@ -265,7 +265,7 @@ $(function()
 	 		alert("after open");
 	        xhr.open('POST', 'http://www.a-information.com/chatdawg/484flue.php', true);
 	        alert("after post");
-	        //xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	        xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	        //var data = ''; //'image=' + dataURL;
 	        //alert("before send"+ dataURL);
 	        //xhr.send(data);
