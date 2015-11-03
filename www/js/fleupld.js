@@ -263,7 +263,7 @@ $(function()
 	        
 	        xhr.onerror = function () { alert("errorstatus: " + xhr.status + " ajaxoptions: " + ajaxOptions + " throwError: " + thrownError); };
 	 		alert("after open");
-	        //xhr.open('POST', 'http://www.a-information.com/chatdawg/484flue.php', true);
+	        xhr.open('POST', 'http://www.a-information.com/chatdawg/484flue.php', true);
 	        alert("after post");
 	        //xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	        //var data = ''; //'image=' + dataURL;
