@@ -45,14 +45,14 @@ function createUser(event)
 	            else
 	            {
 	                // Handle errors here
-	                console.log('ERRORS Logging In: ' + data.error);
+	                console.log('ERRORS Creating: ' + data.error);
 	                errorCreating();
 	            }
 	        },
 	        error: function(jqXHR, textStatus, errorThrown)
 	        {
 	            // Handle errors here
-	            console.log('ERRORS Logging In: ' + textStatus + errorThrown);
+	            console.log('ERRORS Creating: ' + textStatus + errorThrown);
 	        },
 	        complete: function()
 	        {
@@ -407,14 +407,14 @@ function validateUser(event, data)
             	{
             		// Handle errors here
             		console.log('ERRORS: ' + data.error);
-            		alert('ERRORS: ' + data.error);
+            		alert('ERRORS logging in: ' + data.error);
             	}
             },
             error: function(jqXHR, textStatus, errorThrown)
             {
             	// Handle errors here
             	console.log('ERRORS: ' + textStatus);
-            	alert('ERRORS: ' + textStatus);
+            	alert('ERRORS logging in: ' + textStatus +errorThrown );
             },
             complete: function()
             {
