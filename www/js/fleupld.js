@@ -267,7 +267,7 @@ $(function()
 	        alert("after post");
 	        //xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	        //var data = ''; //'image=' + dataURL;
-	        alert("before send"+ dataURL);
+	        //alert("before send"+ dataURL);
 	        //xhr.send(data);
 	      }
 	 
