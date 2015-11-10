@@ -45,7 +45,7 @@ function createUser(event)
 	            else
 	            {
 	                // Handle errors here
-	                console.log('ERRORS: ' + data.error);
+	                console.log('ERRORS Logging In: ' + data.error);
 	                errorCreating();
 	            }
 	        },
