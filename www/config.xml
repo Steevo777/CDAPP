@@ -8,5 +8,7 @@
         </author>
         <content src="index.html" />
         <access origin="*" />
+        <access origin="http://www.a-information.com" />
+        
 </widget>
 
