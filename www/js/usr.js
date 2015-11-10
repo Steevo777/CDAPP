@@ -52,7 +52,7 @@ function createUser(event)
 	        error: function(jqXHR, textStatus, errorThrown)
 	        {
 	            // Handle errors here
-	            console.log('ERRORS: ' + textStatus);
+	            console.log('ERRORS Logging In: ' + textStatus + errorThrown);
 	        },
 	        complete: function()
 	        {
