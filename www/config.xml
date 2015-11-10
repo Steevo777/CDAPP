@@ -16,5 +16,7 @@
     <author href="https://www.a-information.com" email="support@a-information.com">
         Senior Pros Group 
     </author>
+    
+    <access origin="*" />
 
 </widget>
