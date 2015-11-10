@@ -414,7 +414,7 @@ function validateUser(event, data)
             {
             	// Handle errors here
             	console.log('ERRORS: ' + textStatus);
-            	alert('ERRORS logging in: ' + textStatus +errorThrown );
+            	alert('ERRORS logging in server: ' + textStatus +errorThrown );
             },
             complete: function()
             {
