@@ -16,6 +16,10 @@
     <author href="https://www.a-information.com" email="support@a-information.com">
         Senior Pros Group 
     </author>
+   	<gap:plugin name="org.apache.cordova.file" />
+    <gap:plugin name="org.apache.cordova.file-transfer" />
+  
+    
     <gap:plugin name="cordova-plugin-whitelist" source="npm" />
     <access origin="*" />
 
