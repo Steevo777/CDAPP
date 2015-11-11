@@ -7,10 +7,14 @@ $(function()
 	// Add events
 	$('input[type=file]').on('change', prepareUpload);
 	//$('#add_post_form').on('submit', resizeAndUpload);
-	$('#add_post_form').on('submit', testUpload);
+	$('#add_post_form').on('submit', uploadFiles);
 	
 	function testUpload(event)
 	{
+		  
+		  
+		  
+		  
 		  var req = new XMLHttpRequest(); 
 		  req.open('POST', 'http://www.a-information.com/chatdawg/484flue.php', true);
 		  alert("post");
