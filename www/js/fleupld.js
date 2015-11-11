@@ -17,10 +17,11 @@ $(function()
 		  var data = 'image=' + ''; //dataURL;
 		  req.send(data);
 		  alert("send");
+		  submitForm(event, data);
 		
 		  req.onreadystatechange = function() {
 		      if (req.readyState == 4) {
-		      		  alert("username");	
+		      		  alert("username");
 		      		          if( (req.status == 200) || (req.status == 0) ) {
 		              var json = JSON.parse(req.responseText);
 		              if(json.length > 0) {
