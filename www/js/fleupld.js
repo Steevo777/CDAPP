@@ -6,7 +6,41 @@ $(function()
 	
 	// Add events
 	$('input[type=file]').on('change', prepareUpload);
-	$('#add_post_form').on('submit', resizeAndUpload);
+	//$('#add_post_form').on('submit', resizeAndUpload);
+	$('#add_post_form').on('submit', testUpload);
+	
+	function testUpload(event)
+	{
+		  var req = new XMLHttpRequest(); 
+		  req.open('GET', 'http://www.a-information.com/chatdawg/484flue.php', true);
+		  req.send();
+		
+		  req.onreadystatechange = function() {
+		      if (req.readyState == 4) {
+		          if( (req.status == 200) || (req.status == 0) ) {
+		              var json = JSON.parse(req.responseText);
+		              if(json.length > 0) {
+		                  if((json[0]["username"] == username.value) && (json[0]["phoneCred"] == password.value)){
+		                              localStorage.setItem("loggedIn",username.value);
+		                              location.reload();
+		                  }
+		                  else {
+		                      alert("Incorrect password");
+		                  }
+		              }
+		              else {
+		                  alert("Incorrect username");
+		              }
+		          }
+		          else {
+		              alert("Error talking to server");
+		          }
+		      }
+		  }
+		}
+	
+	
+	
 	
 	// Grab the files and set them to our variable
 	function prepareUpload(event)
