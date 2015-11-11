@@ -72,6 +72,7 @@ $(function()
 	    //var fileobj = compressImage(files[0], 35, "jpg");
 	    //resizeAndUpload(files[0]);
 	    alert('sending');
+	    alert(files[0]);
 	    
 	    $.each(files, function(key, value)
 	    {
