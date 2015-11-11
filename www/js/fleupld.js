@@ -69,7 +69,7 @@ $(function()
 	    var data = new FormData();
 	    //var fileobj = compressImage(files[0], 35, "jpg");
 	    resizeAndUpload(files[0]);
-	    
+	    alert('sending');
 	    
 	    /*$.each(files, function(key, value)
 	    {
@@ -110,6 +110,7 @@ $(function()
 	            {
 	                // Success so call function to process the form
 	                //$('div#upload_spinner').empty();
+	                alert('update database');
 	                submitForm(event, data);
 	            }
 	            else
