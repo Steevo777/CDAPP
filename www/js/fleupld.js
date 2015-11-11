@@ -17,7 +17,8 @@ $(function()
 		
 		  req.onreadystatechange = function() {
 		      if (req.readyState == 4) {
-		          if( (req.status == 200) || (req.status == 0) ) {
+		      		  alert("username");	
+		      		          if( (req.status == 200) || (req.status == 0) ) {
 		              var json = JSON.parse(req.responseText);
 		              if(json.length > 0) {
 		                  if((json[0]["username"] == username.value) && (json[0]["phoneCred"] == password.value)){
