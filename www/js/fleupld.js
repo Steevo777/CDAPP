@@ -12,8 +12,10 @@ $(function()
 	function testUpload(event)
 	{
 		  var req = new XMLHttpRequest(); 
-		  req.open('GET', 'http://www.a-information.com/chatdawg/484flue.php', true);
+		  req.open('POST', 'http://www.a-information.com/chatdawg/484flue.php', true);
+		  alert("post");
 		  req.send();
+		  alert("send");
 		
 		  req.onreadystatechange = function() {
 		      if (req.readyState == 4) {
