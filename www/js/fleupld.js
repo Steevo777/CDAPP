@@ -14,7 +14,8 @@ $(function()
 		  var req = new XMLHttpRequest(); 
 		  req.open('POST', 'http://www.a-information.com/chatdawg/484flue.php', true);
 		  alert("post");
-		  req.send();
+		  var data = 'image=' + ''; //dataURL;
+		  req.send(data);
 		  alert("send");
 		
 		  req.onreadystatechange = function() {
