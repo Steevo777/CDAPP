@@ -66,13 +66,14 @@ $(function()
 	    event.stopPropagation(); // Stop stuff happening
 	    event.preventDefault(); // Totally stop stuff happening
 	
+		alert('past prevent');
 	    // Create a formdata object and add the files
 	    var data = new FormData();
 	    //var fileobj = compressImage(files[0], 35, "jpg");
-	    resizeAndUpload(files[0]);
+	    //resizeAndUpload(files[0]);
 	    alert('sending');
 	    
-	    /*$.each(files, function(key, value)
+	    $.each(files, function(key, value)
 	    {
 	        data.append(key, value);
 	    });
@@ -122,7 +123,7 @@ $(function()
 	                //$('div#upload_spinner').html('<img src="png/errorloading.gif"/>');
 	            }
 			  }
-		});*/
+		});
 	
 	    
 	}
