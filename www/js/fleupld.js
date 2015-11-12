@@ -67,17 +67,17 @@ $(function()
 	
 		// Create a formdata object and add the files
 	    var data = new FormData();
-	    var fileobj = compressImage(files[0], 35, "jpg");
+	    //var fileobj = compressImage(files[0], 35, "jpg");
 	    //resizeAndUpload(files[0]);
 	    //alert(files[0]);
 	    
-	    data.append(key, fileobj);
-	    alert ('After file append');
+	    //data.append(key, fileobj);
+	    //alert ('After file append');
 	    
-	    //$.each(files, function(key, value)
-	    //{
-	    //    data.append(key, value);
-	    //});
+	    $.each(files, function(key, value)
+	    {
+	        data.append(key, value);
+	    });
 	    
 	    $('#upload_progess').show();
 	    $.ajax({
@@ -194,7 +194,7 @@ $(function()
                 mime_type = "image/png";
              }
              
-             var reader = new FileReader();
+             /*var reader = new FileReader();
              var tempImg = new Image();
     		 tempImg.src = reader.result;
              
@@ -205,7 +205,40 @@ $(function()
              var newImageData = cvs.toDataURL(mime_type, quality/100);
              var result_image_obj = new Image();
              result_image_obj.src = newImageData;
-             return result_image_obj;
+             return result_image_obj; 
+             */
+             
+            var reader = new FileReader();
+	    	//reader.onloadend = function() {
+	 
+		    var tempImg = new Image();
+		    tempImg.src = reader.result;
+		    //tempImg.onload = function() {
+		 
+		        var MAX_WIDTH = 1280;
+		        var MAX_HEIGHT = 740;
+		        var tempW = tempImg.width;
+		        var tempH = tempImg.height;
+		        if (tempW > tempH) {
+		            if (tempW > MAX_WIDTH) {
+		               tempH *= MAX_WIDTH / tempW;
+		               tempW = MAX_WIDTH;
+		            }
+		        } else {
+		            if (tempH > MAX_HEIGHT) {
+		               tempW *= MAX_HEIGHT / tempH;
+		               tempH = MAX_HEIGHT;
+		            }
+		        }
+		 		alert ("Resize half way");
+		        var canvas = document.createElement('canvas');
+		        canvas.width = tempW;
+		        canvas.height = tempH;
+		        var ctx = canvas.getContext("2d");
+		        ctx.drawImage(source_img_obj, 0, 0, tempW, tempH);
+		        var dataURL = canvas.toDataURL("image/jpeg");
+		   // }
+		   //}
     	
     }
 	
