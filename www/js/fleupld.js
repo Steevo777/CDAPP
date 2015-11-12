@@ -109,17 +109,18 @@ $(function()
 			  processData: false, // Don't process the files
 	          contentType: false, // Set content type to false as jQuery will tell the server its a query string request
 	      	  success: function(data, result) {
-			    if(typeof data.error === 'undefined')
+			    if(data.status == 'success')
 	            {
 	                // Success so call function to process the form
 	                //$('div#upload_spinner').empty();
+	                fileNameUni = data.file;
 	                alert('update database');
 	                submitForm(event, data);
 	            }
 	            else
 	            {
 	                // Handle errors here
-	                console.log('ERRORS: ' + data.error);
+	                console.log('ERRORS: ' + data.status);
 	                //$('div#upload_spinner').empty();
 	                //$('div#upload_spinner').html('<img src="png/errorloading.gif"/>');
 	            }
@@ -150,20 +151,18 @@ $(function()
 	        dataType: 'json',
 	        success: function(data, textStatus, jqXHR)
 	        {
-	            if(typeof data.error === 'undefined')
+	            if(data.status === 'success')
 	            {
 	                // Success so call function to process the form
-	                //alert('SUCCESS: ' + data.success);
-	                alert('SUCCESS DATA: ' + data.formData);
+	                alert('SUCCESS: ' + data.status);
+	                //alert('SUCCESS DATA: ' + data.formData);
 	                $('#upload_progess').hide();
 	                close_all_divs();
-	                
-	                
 	            }
 	            else
 	            {
 	                // Handle errors here
-	                console.log('ERRORS Data: ' + data.error);
+	                console.log('ERRORS Data: ' + data.status);
 	            }
 	        },
 	        error: function(jqXHR, textStatus, errorThrown)

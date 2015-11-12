@@ -4,11 +4,13 @@
 
 $data = array();
 $postpictureID = "";
+$filename = "";
 
 if(isset($_GET['files']))
 {  
     $error = false;
-    $files = array();
+    //$files = array();
+    $unid = "";
 
 	$baseserverURL='/fups/';//For database name
 	$uploaddir = './fups/';//For directory add
@@ -18,14 +20,17 @@ if(isset($_GET['files']))
     {
         if(move_uploaded_file($file['tmp_name'], $uploaddir .basename($file['name'])))
         {
-            $files[] = $file['name'];
+            //$files[] = $file['name'];
+            $unid = $file['name'];
+            $success = true;
         }
         else
         {
-            $error = true;
+            $success = false;
         }
     }
-    $data = ($error) ? array('error' => 'There was an error uploading your files') : array('files' => $files);
+    //$data = ($error) ? array('error' => 'There was an error uploading your files') : array('files' => $files);
+    $data = $success ? array('file' => $unid,'status' => 'success') : array('file' => '','status' => 'error');
 }
 else
 {
@@ -58,18 +63,19 @@ VALUES (NULL ,   :userid,  :username, :type,  :post, NULL , :postpictureID , NUL
  
 			//$sql = "INSERT INTO votes (postid,userid,vote,date) VALUES (:postid,:userid,:vote,:date)";
 			$q = $db1->prepare($sql);
-			$result = $q->execute(array(':userid'=>$userid,':username'=>$username,':type'=>$type,':post'=>$post,':postpictureID'=>$postpictureID,':date'=>$date,':expiredate' =>$expiredate,':expirehour' =>$expirehour ));
+			$success = $q->execute(array(':userid'=>$userid,':username'=>$username,':type'=>$type,':post'=>$post,':postpictureID'=>$postpictureID,':date'=>$date,':expiredate' =>$expiredate,':expirehour' =>$expirehour ));
 		
 			header('Content-Type: application/json');
-			if ($result === true) {
-				$data = array('success' => 'Form was submitted', 'formData' => $_POST['filename']);
+			$data = $success ? array('file' => $unid,'status' => 'success') : array('file' => '','status' => 'error');
+			//if ($result === true) {
+				//$data = array('success' => 'Form was submitted', 'formData' => $_POST['filename']);
     			//header('Cache-Control: no-cache, must-revalidate');
 		    	//header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
 		    	//$array = array();
 				//$array['success'] = TRUE;
 				//$array['qsuccess'] = $q;
 				//echo json_encode($array);
-			}
+			//}
 				//$array['result'] = $q; */
     	
 }
