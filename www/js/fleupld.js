@@ -62,22 +62,22 @@ $(function()
 	// Catch the form submit and upload the files
 	function uploadFiles(event)
 	{
-	    alert('upload started');
 	    event.stopPropagation(); // Stop stuff happening
 	    event.preventDefault(); // Totally stop stuff happening
 	
-		alert('past prevent');
-	    // Create a formdata object and add the files
+		// Create a formdata object and add the files
 	    var data = new FormData();
-	    //var fileobj = compressImage(files[0], 35, "jpg");
+	    var fileobj = compressImage(files[0], 35, "jpg");
 	    //resizeAndUpload(files[0]);
-	    alert('sending');
-	    alert(files[0]);
+	    //alert(files[0]);
 	    
-	    $.each(files, function(key, value)
-	    {
-	        data.append(key, value);
-	    });
+	    data.append(key, fileobj);
+	    alert ('After file append');
+	    
+	    //$.each(files, function(key, value)
+	    //{
+	    //    data.append(key, value);
+	    //});
 	    
 	    $('#upload_progess').show();
 	    $.ajax({

@@ -305,7 +305,8 @@ function getList(type){
                     var dateDay = "";
                     if (item.date)
                     {
-                        dateFc=new Date(item.date);
+                        revisedDate = item.date.replace(/-/g,'/');
+                        dateFc=new Date(revisedDate);
                         //Assemble date
                         var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
                         var months = ["Jan","Feb","March","April","May","June","July","Aug","Sept","Oct","Nov","Dec"];
