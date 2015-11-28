@@ -67,17 +67,18 @@ $(function()
 	
 		// Create a formdata object and add the files
 	    var data = new FormData();
-	    //var fileobj = compressImage(files[0], 35, "jpg");
+	    var fileobj = compressImage(files[0], 35, "jpg");
+	    
 	    //resizeAndUpload(files[0]);
 	    //alert(files[0]);
 	    
-	    //data.append(key, fileobj);
-	    //alert ('After file append');
+	    data.append(key, fileobj);
+	    alert ('After file append');
 	    
-	    $.each(files, function(key, value)
+	    /*$.each(files, function(key, value)
 	    {
 	        data.append(key, value);
-	    });
+	    });*/
 	    
 	    $('#upload_progess').show();
 	    $.ajax({
@@ -194,7 +195,8 @@ $(function()
                 mime_type = "image/png";
              }
              
-             /*var reader = new FileReader();
+             //start first
+             var reader = new FileReader();
              var tempImg = new Image();
     		 tempImg.src = reader.result;
              
@@ -205,9 +207,11 @@ $(function()
              var newImageData = cvs.toDataURL(mime_type, quality/100);
              var result_image_obj = new Image();
              result_image_obj.src = newImageData;
+             alert('SUCCESS: ');
              return result_image_obj; 
-             */
-             
+             // end first
+            
+            /* 
             var reader = new FileReader();
 	    	//reader.onloadend = function() {
 	 
@@ -236,7 +240,7 @@ $(function()
 		        canvas.height = tempH;
 		        var ctx = canvas.getContext("2d");
 		        ctx.drawImage(source_img_obj, 0, 0, tempW, tempH);
-		        var dataURL = canvas.toDataURL("image/jpeg");
+		        var dataURL = canvas.toDataURL("image/jpeg"); */
 		   // }
 		   //}
     	
