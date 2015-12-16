@@ -304,7 +304,9 @@ $(function()
 			        	alert('Inside if for send');
 						
 			          	var dataReturn = $.parseJSON(xhr.responseText);
+						alert('dataReturn=',dataReturn);
 			          	var uploadResult = dataReturn['file'];
+			          	alert('uploadResult=',uploadResult);
 			          	fileNameUni = dataReturn['file'];
 			          	var uploadStatus = dataReturn['status'];
 			          	alert('uploadResult=',uploadResult);
