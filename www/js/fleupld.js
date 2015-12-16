@@ -6,8 +6,8 @@ $(function()
 	
 	// Add events
 	$('input[type=file]').on('change', prepareUpload);
-	//$('#add_post_form').on('submit', resizeAndUpload);
-	$('#add_post_form').on('submit', uploadFiles);
+	$('#add_post_form').on('submit', resizeAndUpload);
+	//$('#add_post_form').on('submit', uploadFiles);
 	
 	function testUpload(event)
 	{
@@ -196,10 +196,11 @@ $(function()
              }
              
              //start first
-             var reader = new FileReader();
-             var tempImg = new Image();
-    		 tempImg.src = reader.result;
+             //var reader = new FileReader();
+             //var tempImg = new Image();
+    		 //tempImg.src = reader.result;
              
+             alert('compress');
              var cvs = document.createElement('canvas');
              cvs.width = source_img_obj.naturalWidth;
              cvs.height = source_img_obj.naturalHeight;
@@ -284,7 +285,7 @@ $(function()
 	               tempH = MAX_HEIGHT;
 	            }
 	        }
-	 		alert ("Resize half way");
+	 		alert ("Resize half way: Image width:"+tempImg.width);
 	        var canvas = document.createElement('canvas');
 	        canvas.width = tempW;
 	        canvas.height = tempH;
