@@ -260,6 +260,7 @@ $(function()
 	    $.each(files, function(key, value)
 	    {
 	        data.append(key, value);
+	        alert ("Resize Added File: "+value);
 	    });
 		
 		
@@ -292,7 +293,7 @@ $(function()
 	        var ctx = canvas.getContext("2d");
 	        ctx.drawImage(this, 0, 0, tempW, tempH);
 	        var dataURL = canvas.toDataURL("image/jpeg");
-	        
+	        alert("DataUrl:"+dataURL);
 	 
 	 		alert ("Resize "+canvas.width);
 	        var xhr = new XMLHttpRequest();
