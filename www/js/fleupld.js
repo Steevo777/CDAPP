@@ -301,25 +301,23 @@ $(function()
 	        		//$('#upload_progess').show();
 	        		alert('Upload Status '+xhr.status+'  ReadyState'+xhr.readyState);
 	        		if (xhr.readyState==4 && xhr.status==200){
-			        	console.log('xhr.readyState=',xhr.readyState);
-			          	console.log('xhr.status=',xhr.status);
-			          	console.log('response=',xhr.responseText);
+			        	alert('Inside if for send');
 						
 			          	var dataReturn = $.parseJSON(xhr.responseText);
 			          	var uploadResult = dataReturn['file'];
 			          	fileNameUni = dataReturn['file'];
 			          	var uploadStatus = dataReturn['status'];
-			          	console.log('uploadResult=',uploadResult);
+			          	alert('uploadResult=',uploadResult);
 			
 			        	if (uploadStatus=='success'){
-			        		console.log('successfully uploaded file');
+			        		alert('successfully uploaded file');
 			            	submitForm(event, data);
 			            	alert('Upload Complete');
 	                		$('#upload_progess').hide();
 	                		close_all_divs();
 			            }else
 			            {
-			          	console.log('failed to upload file');
+			          	alert('failed to upload file');
 			            displayError('failed to upload')
 			        	}
 			       	}
