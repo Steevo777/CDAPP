@@ -285,8 +285,8 @@ $(function()
 	               tempH = MAX_HEIGHT;
 	            }
 	        }
-	 		alert ("Resize half way: Image width:"+tempImg.width);
-	        var canvas = document.createElement('canvas');
+	 		
+	 		var canvas = document.createElement('canvas');
 	        canvas.width = tempW;
 	        canvas.height = tempH;
 	        var ctx = canvas.getContext("2d");
@@ -298,7 +298,7 @@ $(function()
 	        var xhr = new XMLHttpRequest();
 	        xhr.onreadystatechange = function(ev){
 	        		alert ("Onready 2");
-	        		$('#upload_progess').show();
+	        		//$('#upload_progess').show();
 	        		alert('Upload Status '+xhr.status+'  ReadyState'+xhr.readyState);
 	        		if (xhr.readyState==4 && xhr.status==200){
 			        	console.log('xhr.readyState=',xhr.readyState);
@@ -352,7 +352,7 @@ $(function()
 	        //xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	        //var data = ''; //'image=' + dataURL;
 	        alert("before send");
-	        //xhr.send(data);
+	        xhr.send(data);
 	      }
 	 
 	      alert ("ended send");		 
