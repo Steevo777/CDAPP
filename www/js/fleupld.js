@@ -294,7 +294,7 @@ $(function()
 	        
 	        var dataURL = canvas.toDataURL("image/jpeg");
 	        alert("after canvas draw");
-	        alert("DataUrl:"+dataURL);
+	        //alert("DataUrl:"+dataURL);
 	 
 	 		alert ("Resize "+canvas.width);
 	        var xhr = new XMLHttpRequest();
