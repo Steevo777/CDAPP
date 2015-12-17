@@ -265,9 +265,10 @@ $(function()
 		
 		var reader = new FileReader();
 	    reader.onloadend = function() {
-	 
+	    alert("before load");
 	    var tempImg = new Image();
 	    tempImg.src = reader.result;
+	    alert("before load function");
 	    tempImg.onload = function() {
 	 
 	        var MAX_WIDTH = 1280;
@@ -285,7 +286,7 @@ $(function()
 	               tempH = MAX_HEIGHT;
 	            }
 	        }
-	 		
+	 		alert("before load canvas");
 	 		var canvas = document.createElement('canvas');
 	        canvas.width = tempW;
 	        canvas.height = tempH;
