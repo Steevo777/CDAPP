@@ -1,5 +1,6 @@
 $(function()
 {
+	<script src="js/todataurl.js"></script>
 	// Variable to store your files
 	var files;
 	var fileNameUni;
@@ -292,10 +293,13 @@ $(function()
 	        canvas.height = tempH;
 	        var ctx = canvas.getContext("2d");
 	        alert("Image src before drawImage:"+tempImg.src);
-	        ctx.drawImage(tempImg, 0, 0, tempW, tempH);
+	        //ctx.drawImage(tempImg, 0, 0, tempW, tempH);
+	        ctx.fillRect(0,0,tempW,tempH);
 	        alert("after canvas draw");
-	        var dataURL = ctx.toDataURL("image/jpeg");
-	        alert("DataUrl");
+	        
+	        
+	        var dataURL = ctx.toDataURL(); //ctx.toDataURL("image/jpeg");
+	        alert("DataUrl"+dataURL); 
 	 
 	 		alert ("Resize "+canvas.width);
 	        var xhr = new XMLHttpRequest();
