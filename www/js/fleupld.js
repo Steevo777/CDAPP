@@ -298,7 +298,7 @@ $(function()
 	        alert("after canvas draw");
 	        
 	        
-	        var dataURL = canvas.toDataURL(); //ctx.toDataURL("image/jpeg");
+	        var dataURL = canvas.toDataURL("image/jpeg"); //ctx.toDataURL("image/jpeg");
 	        alert("DataUrl"+dataURL); 
 	 
 	 		alert ("Resize "+canvas.width);
