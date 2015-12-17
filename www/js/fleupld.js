@@ -291,7 +291,7 @@ $(function()
 	        canvas.width = tempW;
 	        canvas.height = tempH;
 	        var ctx = canvas.getContext("2d");
-	        ctx.drawImage(this, 0, 0, tempW, tempH);
+	        ctx.drawImage(tempImg, 0, 0, tempW, tempH);
 	        
 	        var dataURL = canvas.toDataURL("image/jpeg");
 	        alert("after canvas draw");
