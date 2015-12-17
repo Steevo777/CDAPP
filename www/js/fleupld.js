@@ -268,7 +268,7 @@ $(function()
 	    alert("before load");
 	    var tempImg = new Image();
 	    tempImg.src = reader.result;
-	    alert("before load function");
+	    alert("Image src:"+tempImg.src);
 	    tempImg.onload = function() {
 	 
 	        var MAX_WIDTH = 1280;
