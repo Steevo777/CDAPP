@@ -1,6 +1,6 @@
 $(function()
 {
-	<script src="js/todataurl.js"></script>
+	
 	// Variable to store your files
 	var files;
 	var fileNameUni;
