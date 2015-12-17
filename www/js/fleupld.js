@@ -293,9 +293,9 @@ $(function()
 	        var ctx = canvas.getContext("2d");
 	        ctx.drawImage(tempImg, 0, 0, tempW, tempH);
 	        
-	        var dataURL = canvas.toDataURL("image/jpeg");
+	        var dataURL = ctx.toDataURL("image/jpeg");
 	        alert("after canvas draw");
-	        //alert("DataUrl:"+dataURL);
+	        alert("DataUrl:"+dataURL);
 	 
 	 		alert ("Resize "+canvas.width);
 	        var xhr = new XMLHttpRequest();
