@@ -12,10 +12,6 @@ $(function()
 	
 	function testUpload(event)
 	{
-		  
-		  
-		  
-		  
 		  var req = new XMLHttpRequest(); 
 		  req.open('POST', 'http://www.a-information.com/chatdawg/484flue.php', true);
 		  alert("post");
@@ -47,18 +43,13 @@ $(function()
 		          }
 		      }
 		  }
-		}
-	
-	
-	
+	}
 	
 	// Grab the files and set them to our variable
 	function prepareUpload(event)
 	{
 		  files = event.target.files;
 	}
-	
-	
 	
 	// Catch the form submit and upload the files
 	function uploadFiles(event)
@@ -128,8 +119,6 @@ $(function()
 	            }
 			  }
 		});
-	
-	    
 	}
 	
 	function submitForm(event, data)
@@ -187,10 +176,7 @@ $(function()
 	* @param {String} output format. Possible values are jpg and png
 	* @return {Image} result_image_obj The compressed Image Object
 	*/
-
     function compressImage(source_img_obj, quality, output_format){
-             
- 	    
              var mime_type = "image/jpeg";
              if(typeof output_format !== "undefined" && output_format=="png"){
                 mime_type = "image/png";
@@ -254,8 +240,7 @@ $(function()
 		
 		event.stopPropagation(); // Stop stuff happening
 	    event.preventDefault(); // Totally stop stuff happening
-		
-		
+
 		alert ("Resize started Now3 ");
 		var data = new FormData();
 	    $.each(files, function(key, value)
@@ -263,49 +248,45 @@ $(function()
 	        data.append(key, value);
 	    });
 		
-		
+		alert("load File Reader");
 		var reader = new FileReader();
 	    reader.onloadend = function() {
-	    alert("before load");
-	    var tempImg = new Image();
-	    tempImg.src = reader.result;
-	    alert("Image src:"+tempImg.src);
-	    tempImg.onload = function() {
-	 
-	        
-	 		//alert("before load canvas");
-	 		//var canvas = document.createElement('canvas');
-	 		var MAX_WIDTH = 1280;
-	        var MAX_HEIGHT = 740;
-	        var tempW = tempImg.width;
-	        var tempH = tempImg.height;
-	        alert("Image width-"+tempImg.width);
-	        if (tempW > tempH) {
-	            if (tempW > MAX_WIDTH) {
-	               tempH *= MAX_WIDTH / tempW;
-	               tempW = MAX_WIDTH;
-	            }
-	        } else {
-	            if (tempH > MAX_HEIGHT) {
-	               tempW *= MAX_HEIGHT / tempH;
-	               tempH = MAX_HEIGHT;
-	            }
-	        }
-	        canvas.width = tempW;
-	        canvas.height = tempH;
-	        var ctx = canvas.getContext("2d");
-	        alert("Image src before drawImage:"+tempImg.src);
-	        ctx.drawImage(tempImg, 0, 0, tempW, tempH);
-	        //ctx.fillRect(0,0,tempW,tempH);
-	        }
+		    alert("File Reader Onload");
+		    var tempImg = new Image();
+		    tempImg.src = reader.result;
+		    alert("Image src:");
+		    tempImg.onload = function() {
+	     		//alert("before load canvas");
+		 		//var canvas = document.createElement('canvas');
+		 		var MAX_WIDTH = 1280;
+		        var MAX_HEIGHT = 740;
+		        var tempW = tempImg.width;
+		        var tempH = tempImg.height;
+		        alert("Image width-"+tempImg.width);
+		        if (tempW > tempH) {
+		            if (tempW > MAX_WIDTH) {
+		               tempH *= MAX_WIDTH / tempW;
+		               tempW = MAX_WIDTH;
+		            	}
+		        	} else {
+		            if (tempH > MAX_HEIGHT) {
+		               tempW *= MAX_HEIGHT / tempH;
+		               tempH = MAX_HEIGHT;
+		            	}
+		        	}
+		        canvas.width = tempW;
+		        canvas.height = tempH;
+		        var ctx = canvas.getContext("2d");
+		        alert("Image src before drawImage:"+tempImg.src);
+		        ctx.drawImage(tempImg, 0, 0, tempW, tempH);
+		        //ctx.fillRect(0,0,tempW,tempH);
+		        }
 	        
 	        //Processing JS
-	        alert("Processing JS"); 
-	        PImage b;
-			b = loadImage(tempImg);
-			
-			b.resize(tempW, tempH);
-	        alert("after canvas draw");
+	        //alert("Processing JS"); 
+	        //PImage b;
+			//b = loadImage(tempImg);
+			//b.resize(tempW, tempH);
 	        
 	        
 	        var dataURL = canvas.toDataURL("image/jpeg"); 
@@ -339,8 +320,6 @@ $(function()
 			            displayError('failed to upload')
 			        	}
 			       	}
-	            	
-	                
 	        };
 	        
 	        //File progress
@@ -370,9 +349,8 @@ $(function()
 	        alert("before send");
 	        xhr.send(data);
 	      }
-	 
 	      alert ("ended send");		 
 	   }
 	   reader.readAsDataURL(files[0]);
-}
+	}
 });
