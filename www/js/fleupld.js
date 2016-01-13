@@ -257,7 +257,7 @@ $(function()
 		    alert("Image src:");
 		    tempImg.onload = function() {
 	     		//alert("before load canvas");
-		 		//var canvas = document.createElement('canvas');
+		 		var canvas = document.createElement('canvas');
 		 		var MAX_WIDTH = 1280;
 		        var MAX_HEIGHT = 740;
 		        var tempW = tempImg.width;
@@ -277,16 +277,17 @@ $(function()
 		        canvas.width = tempW;
 		        canvas.height = tempH;
 		        var ctx = canvas.getContext("2d");
-		        alert("Image src before drawImage:"+tempImg.src);
+		        alert("Image src before drawImage:");
 		        ctx.drawImage(tempImg, 0, 0, tempW, tempH);
 		        //ctx.fillRect(0,0,tempW,tempH);
+		        alert("After Image drawImage"+tempImg.width);
 		     }//End Temp Load
 	        
 	        //Processing JS
 	        //alert("Processing JS"); 
 	        //PImage b;
 			//b = loadImage(tempImg);
-			//b.resize(tempW, tempH);
+			//b.resize(tempW, tempH); 
 	        
 	        
 	        var dataURL = canvas.toDataURL("image/jpeg"); 
