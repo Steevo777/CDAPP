@@ -272,10 +272,14 @@ $(function()
 	    alert("Image src:"+tempImg.src);
 	    tempImg.onload = function() {
 	 
-	        var MAX_WIDTH = 1280;
+	        
+	 		//alert("before load canvas");
+	 		//var canvas = document.createElement('canvas');
+	 		var MAX_WIDTH = 1280;
 	        var MAX_HEIGHT = 740;
 	        var tempW = tempImg.width;
 	        var tempH = tempImg.height;
+	        alert("Image width-"+tempImg.width);
 	        if (tempW > tempH) {
 	            if (tempW > MAX_WIDTH) {
 	               tempH *= MAX_WIDTH / tempW;
@@ -287,20 +291,25 @@ $(function()
 	               tempH = MAX_HEIGHT;
 	            }
 	        }
-	 		alert("before load canvas");
-	 		var canvas = document.createElement('canvas');
 	        canvas.width = tempW;
 	        canvas.height = tempH;
 	        var ctx = canvas.getContext("2d");
 	        alert("Image src before drawImage:"+tempImg.src);
 	        ctx.drawImage(tempImg, 0, 0, tempW, tempH);
 	        //ctx.fillRect(0,0,tempW,tempH);
+	        }
+	        
+	        //Processing JS
+	        alert("Processing JS"); 
+	        PImage b;
+			b = loadImage(tempImg);
+			
+			b.resize(tempW, tempH);
 	        alert("after canvas draw");
 	        
 	        
-	        var dataURL = canvas.toDataURL("image/jpeg"); //ctx.toDataURL("image/jpeg");
+	        var dataURL = canvas.toDataURL("image/jpeg"); 
 	        alert("DataUrl"+dataURL); 
-	 
 	 		alert ("Resize "+canvas.width);
 	        var xhr = new XMLHttpRequest();
 	        xhr.onreadystatechange = function(ev){
