@@ -280,7 +280,7 @@ $(function()
 		        alert("Image src before drawImage:"+tempImg.src);
 		        ctx.drawImage(tempImg, 0, 0, tempW, tempH);
 		        //ctx.fillRect(0,0,tempW,tempH);
-		        }
+		     }//End Temp Load
 	        
 	        //Processing JS
 	        //alert("Processing JS"); 
@@ -337,8 +337,7 @@ $(function()
 				        }
 			      	}
 			      }
-			};
-	        //end file progress
+			};//end file progress
 	        
 	        xhr.onerror = function () { alert("errorstatus: " + xhr.status + " ajaxoptions: " + ajaxOptions + " throwError: " + thrownError); };
 	 		alert("after open");
@@ -348,9 +347,10 @@ $(function()
 	        var data = 'image=' + dataURL;
 	        alert("before send");
 	        xhr.send(data);
-	      }
+	      
 	      alert ("ended send");		 
-	   }
+	   }//End of Reader
 	   reader.readAsDataURL(files[0]);
-	}
-});
+	   
+	}//End Resize Function
+});//Main Function
