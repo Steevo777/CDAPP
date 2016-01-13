@@ -255,9 +255,10 @@ $(function()
 		    var tempImg = new Image();
 		    tempImg.src = reader.result;
 		    alert("Image src:");
+		    var canvas = document.createElement('canvas');
 		    tempImg.onload = function() {
 	     		//alert("before load canvas");
-		 		var canvas = document.createElement('canvas');
+		 		
 		 		var MAX_WIDTH = 1280;
 		        var MAX_HEIGHT = 740;
 		        var tempW = tempImg.width;
@@ -289,7 +290,7 @@ $(function()
 			//b = loadImage(tempImg);
 			//b.resize(tempW, tempH); 
 	        
-	        
+	        alert("Before DataUrl"+dataURL);
 	        var dataURL = canvas.toDataURL("image/jpeg"); 
 	        alert("DataUrl"+dataURL); 
 	 		alert ("Resize "+canvas.width);
