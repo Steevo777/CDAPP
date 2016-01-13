@@ -347,6 +347,7 @@ $(function()
 	        alert("after post");
 	        //xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	        var data = 'image=' + dataURL;
+	        alert("After DataUrl in URL"+dataURL); 
 	        alert("before send");
 	        xhr.send(data);
 	      
