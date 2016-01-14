@@ -254,8 +254,7 @@ $(function()
 		    alert("File Reader Onload");
 		    var tempImg = new Image();
 		    tempImg.src = reader.result;
-		    alert("Image src:");
-		    var canvas = document.createElement('canvas');
+  		    var canvas = document.createElement('canvas');
 		    tempImg.onload = function() {
 	     		//alert("before load canvas");
 		 		
@@ -280,7 +279,7 @@ $(function()
 		        var ctx = canvas.getContext("2d");
 		        alert("Image src before drawImage:");
 		        ctx.drawImage(tempImg, 0, 0, tempW, tempH);
-		        //ctx.fillRect(0,0,tempW,tempH);
+		        ctx.fillRect(0,0,tempW,tempH);
 		        alert("After Image drawImage"+tempImg.width);
 		     }//End Temp Load
 	        
@@ -345,9 +344,9 @@ $(function()
 	 		alert("after open");
 	        xhr.open('POST', 'http://www.a-information.com/chatdawg/484flue.php', true);
 	        alert("after post");
-	        //xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	        xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	        var data = 'image=' + dataURL;
-	        alert("After DataUrl in URL"+dataURL); 
+	        alert("After DataUrl in URL"+data); 
 	        alert("before send");
 	        xhr.send(data);
 	      
