@@ -241,7 +241,7 @@ $(function()
 		event.stopPropagation(); // Stop stuff happening
 	    event.preventDefault(); // Totally stop stuff happening
 
-		alert ("Resize started Now3 ");
+		alert ("Resize started");
 		var data = new FormData();
 	    $.each(files, function(key, value)
 	    {
@@ -250,6 +250,8 @@ $(function()
 		
 		alert("load File Reader");
 		var reader = new FileReader();
+		var resizedImage = "";
+		var dataUrl = "";
 	    reader.onloadend = function() {
 		    alert("File Reader Onload");
 		    var tempImg = new Image();
@@ -276,11 +278,13 @@ $(function()
 		        	}
 		        canvas.width = tempW;
 		        canvas.height = tempH;
-		        var ctx = canvas.getContext("2d");
-		        alert("Image src before drawImage:");
-		        ctx.drawImage(tempImg, 0, 0, tempW, tempH);
-		        ctx.fillRect(0,0,tempW,tempH);
-		        alert("After Image drawImage"+tempImg.width);
+		        alert("After Image drawImage:"+tempImg.src);
+		        canvas.getContext('2d').drawImage(tempImg, 0, 0, tempW, tempH);
+                //dataUrl = canvas.toDataURL('image/jpeg');
+		        //resizedImage = dataURLToBlob(dataUrl);
+		        alert("After Image drawImage:"+tempImg.width);
+		        //alert("After Image Resized:"+resizedImage);
+		        //alert("dataUrl Image Resized:"+dataUrl);
 		     }//End Temp Load
 	        
 	        //Processing JS
@@ -289,9 +293,9 @@ $(function()
 			//b = loadImage(tempImg);
 			//b.resize(tempW, tempH); 
 	        
-	        alert("Before DataUrl"+dataURL);
-	        var dataURL = canvas.toDataURL("image/jpeg"); 
-	        alert("DataUrl"+dataURL); 
+	        //alert("Before DataUrl"+dataURL);
+	        dataURL = canvas.toDataURL("image/jpeg"); 
+	        alert("DataUrl Before Load:"+dataURL); 
 	 		alert ("Resize "+canvas.width);
 	        var xhr = new XMLHttpRequest();
 	        xhr.onreadystatechange = function(ev){
@@ -302,12 +306,12 @@ $(function()
 			        	alert('Inside if for send');
 						alert('Response Text'+xhr.responseText);
 			          	var dataReturn = $.parseJSON(xhr.responseText);
-						alert('dataReturn=',dataReturn);
+						/*alert('dataReturn=',dataReturn);
 			          	var uploadResult = dataReturn['file'];
 			          	alert('uploadResult=',uploadResult);
-			          	fileNameUni = dataReturn['file'];
+			          	fileNameUni = dataReturn['file'];*/
 			          	var uploadStatus = dataReturn['status'];
-			          	alert('uploadResult=',uploadResult);
+			          	alert('uploadResult=',uploadResult); 
 			
 			        	if (uploadStatus=='success'){
 			        		alert('successfully uploaded file');
@@ -345,14 +349,38 @@ $(function()
 	        xhr.open('POST', 'http://www.a-information.com/chatdawg/484flue.php', true);
 	        alert("after post");
 	        xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-	        var data = 'image=' + dataURL;
-	        alert("After DataUrl in URL"+data); 
-	        alert("before send");
+	        var data = 'image=' + dataUrl;
+	        alert("DataUrl in URL- "+data); 
 	        xhr.send(data);
-	      
-	      alert ("ended send");		 
+		    alert ("ended send");		 
 	   }//End of Reader
 	   reader.readAsDataURL(files[0]);
 	   
 	}//End Resize Function
+	
+	/* Utility function to convert a canvas to a BLOB */
+	var dataURLToBlob = function(dataURL) {
+		var BASE64_MARKER = ';base64,';
+		if (dataURL.indexOf(BASE64_MARKER) == -1) {
+		    var parts = dataURL.split(',');
+		    var contentType = parts[0].split(':')[1];
+		    var raw = parts[1];
+		
+		    return new Blob([raw], {type: contentType});
+		}
+		
+		var parts = dataURL.split(BASE64_MARKER);
+		var contentType = parts[0].split(':')[1];
+		var raw = window.atob(parts[1]);
+		var rawLength = raw.length;
+		
+		var uInt8Array = new Uint8Array(rawLength);
+		
+		for (var i = 0; i < rawLength; ++i) {
+		    uInt8Array[i] = raw.charCodeAt(i);
+		}
+		
+		return new Blob([uInt8Array], {type: contentType});
+	}
+	/* End Utility function to convert a canvas to a BLOB      */
 });//Main Function
