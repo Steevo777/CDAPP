@@ -328,7 +328,7 @@ $(function()
 			        	}
 			       	}
 	        };
-	        
+	         
 	        //File progress
 	        xhr.onprogress= function(evt)
 	        {
