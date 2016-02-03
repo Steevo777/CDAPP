@@ -278,14 +278,14 @@ $(function()
 		        	}
 		        canvas.width = tempW;
 		        canvas.height = tempH;
-		        alert("After Image drawImage:"+tempImg.src);
+		        //alert("After Image drawImage:"+tempImg.src);
 		        canvas.getContext('2d').drawImage(tempImg, 0, 0, tempW, tempH);
                 //dataUrl = canvas.toDataURL('image/jpeg');
 		        //resizedImage = dataURLToBlob(dataUrl);
 		        alert("After Image drawImage:"+tempImg.width);
 		        //alert("After Image Resized:"+resizedImage);
 		        //alert("dataUrl Image Resized:"+dataUrl);
-		     }//End Temp Load
+		    
 	        
 	        //Processing JS
 	        //alert("Processing JS"); 
@@ -294,9 +294,11 @@ $(function()
 			//b.resize(tempW, tempH); 
 	        
 	        //alert("Before DataUrl"+dataURL);
-	        dataURL = canvas.toDataURL("image/jpeg"); 
-	        alert("DataUrl Before Load:"+dataURL); 
+	        dataUrl = canvas.toDataURL("image/jpeg"); 
+	        alert("DataUrl Before Load:"+dataUrl); 
 	 		alert ("Resize "+canvas.width);
+	 		
+	 		
 	        var xhr = new XMLHttpRequest();
 	        xhr.onreadystatechange = function(ev){
 	        		alert ("Onready 2");
@@ -352,7 +354,8 @@ $(function()
 	        var data = 'image=' + dataUrl;
 	        alert("DataUrl in URL- "+data); 
 	        xhr.send(data);
-		    alert ("ended send");		 
+		    alert ("ended send");
+		    }//End Temp Load		 
 	   }//End of Reader
 	   reader.readAsDataURL(files[0]);
 	   
