@@ -302,7 +302,7 @@ $(function()
 	        var xhr = new XMLHttpRequest();
 	        xhr.onreadystatechange = function(ev){
 	        		//alert ("Onready 2");
-	        		$('#upload_progess').show();
+	        		//$('#upload_progess').show();
 	        		//alert('Upload Status '+xhr.status+'  ReadyState'+xhr.readyState);
 	        		if (xhr.readyState==4 && xhr.status==200){
 			        	//alert('Inside if for send');
@@ -352,7 +352,7 @@ $(function()
 	        //alert("after post");
 	        xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	        var data = 'image=' + dataUrl;
-	        //alert("DataUrl in URL- "+data); 
+	        alert("DataUrl in URL- "+data); 
 	        xhr.send(data);
 		    alert ("ended send");
 		    }//End Temp Load		 
