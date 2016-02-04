@@ -258,7 +258,7 @@ $(function()
 		    tempImg.src = reader.result;
   		    var canvas = document.createElement('canvas');
 		    tempImg.onload = function() {
-	     		alert("before load canvas");
+	     		//alert("before load canvas");
 		 		
 		 		var MAX_WIDTH = 1280;
 		        var MAX_HEIGHT = 740;
@@ -295,14 +295,14 @@ $(function()
 	        
 	        //alert("Before DataUrl"+dataUrl);
 	        dataUrl = canvas.toDataURL("image/jpeg"); 
-	        alert("DataUrl Before Load:"+dataUrl); 
+	        //alert("DataUrl Before Load:"+dataUrl); 
 	 		//alert ("Resize "+canvas.width);
 	 		
 	 		
 	        var xhr = new XMLHttpRequest();
 	        xhr.onreadystatechange = function(ev){
 	        		//alert ("Onready 2");
-	        		//$('#upload_progess').show();
+	        		$('#upload_progess').show();
 	        		//alert('Upload Status '+xhr.status+'  ReadyState'+xhr.readyState);
 	        		if (xhr.readyState==4 && xhr.status==200){
 			        	//alert('Inside if for send');
