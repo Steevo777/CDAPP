@@ -306,12 +306,12 @@ $(function()
 	        		//alert('Upload Status '+xhr.status+'  ReadyState'+xhr.readyState);
 	        		if (xhr.readyState==4 && xhr.status==200){
 			        	//alert('Inside if for send');
-						alert('Response Text'+xhr.responseText);
+						//alert('Response Text'+xhr.responseText);
 			          	var dataReturn = $.parseJSON(xhr.responseText);
-						/*alert('dataReturn=',dataReturn);
+						//alert('dataReturn=',dataReturn);
 			          	var uploadResult = dataReturn['file'];
 			          	//alert('uploadResult=',uploadResult);
-			          	fileNameUni = dataReturn['file'];*/
+			          	fileNameUni = dataReturn['file'];
 			          	var uploadStatus = dataReturn['status'];
 			          	//alert('uploadResult=',uploadResult); 
 			
