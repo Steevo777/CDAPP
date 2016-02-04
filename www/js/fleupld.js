@@ -350,9 +350,10 @@ $(function()
 	 		//alert("after open");
 	        xhr.open('POST', 'http://www.a-information.com/chatdawg/484flue.php', true);
 	        //alert("after post");
+	        alert("DataUrl in URL- "+dataUrl); 
 	        xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	        var data = 'image=' + dataUrl;
-	        alert("DataUrl in URL- "+data); 
+	        //alert("DataUrl in URL- "+data); 
 	        xhr.send(data);
 		    alert ("ended send");
 		    }//End Temp Load		 
