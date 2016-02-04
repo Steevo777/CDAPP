@@ -293,7 +293,7 @@ $(function()
 			//b = loadImage(tempImg);
 			//b.resize(tempW, tempH); 
 	        
-	        //alert("Before DataUrl"+dataURL);
+	        alert("Before DataUrl"+dataURL);
 	        dataUrl = canvas.toDataURL("image/jpeg"); 
 	        alert("DataUrl Before Load:"+dataUrl); 
 	 		alert ("Resize "+canvas.width);
