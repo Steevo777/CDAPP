@@ -306,7 +306,7 @@ $(function()
 	        		//alert('Upload Status '+xhr.status+'  ReadyState'+xhr.readyState);
 	        		if (xhr.readyState==4 && xhr.status==200){
 			        	//alert('Inside if for send');
-						//alert('Response Text'+xhr.responseText);
+						alert('Response Text'+xhr.responseText);
 			          	var dataReturn = $.parseJSON(xhr.responseText);
 						/*alert('dataReturn=',dataReturn);
 			          	var uploadResult = dataReturn['file'];
