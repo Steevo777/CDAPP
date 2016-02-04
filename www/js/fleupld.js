@@ -241,30 +241,30 @@ $(function()
 		event.stopPropagation(); // Stop stuff happening
 	    event.preventDefault(); // Totally stop stuff happening
 
-		alert ("Resize started");
+		//alert ("Resize started");
 		var data = new FormData();
 	    $.each(files, function(key, value)
 	    {
 	        data.append(key, value);
 	    });
 		
-		alert("load File Reader");
+		//alert("load File Reader");
 		var reader = new FileReader();
 		var resizedImage = "";
 		var dataUrl = "";
 	    reader.onloadend = function() {
-		    alert("File Reader Onload");
+		    //alert("File Reader Onload");
 		    var tempImg = new Image();
 		    tempImg.src = reader.result;
   		    var canvas = document.createElement('canvas');
 		    tempImg.onload = function() {
-	     		//alert("before load canvas");
+	     		alert("before load canvas");
 		 		
 		 		var MAX_WIDTH = 1280;
 		        var MAX_HEIGHT = 740;
 		        var tempW = tempImg.width;
 		        var tempH = tempImg.height;
-		        alert("Image width-"+tempImg.width);
+		        //alert("Image width-"+tempImg.width);
 		        if (tempW > tempH) {
 		            if (tempW > MAX_WIDTH) {
 		               tempH *= MAX_WIDTH / tempW;
@@ -282,7 +282,7 @@ $(function()
 		        canvas.getContext('2d').drawImage(tempImg, 0, 0, tempW, tempH);
                 //dataUrl = canvas.toDataURL('image/jpeg');
 		        //resizedImage = dataURLToBlob(dataUrl);
-		        alert("After Image drawImage:"+tempImg.width);
+		        //alert("After Image drawImage:"+tempImg.width);
 		        //alert("After Image Resized:"+resizedImage);
 		        //alert("dataUrl Image Resized:"+dataUrl);
 		    
@@ -293,30 +293,30 @@ $(function()
 			//b = loadImage(tempImg);
 			//b.resize(tempW, tempH); 
 	        
-	        alert("Before DataUrl"+dataUrl);
+	        //alert("Before DataUrl"+dataUrl);
 	        dataUrl = canvas.toDataURL("image/jpeg"); 
 	        alert("DataUrl Before Load:"+dataUrl); 
-	 		alert ("Resize "+canvas.width);
+	 		//alert ("Resize "+canvas.width);
 	 		
 	 		
 	        var xhr = new XMLHttpRequest();
 	        xhr.onreadystatechange = function(ev){
-	        		alert ("Onready 2");
+	        		//alert ("Onready 2");
 	        		//$('#upload_progess').show();
-	        		alert('Upload Status '+xhr.status+'  ReadyState'+xhr.readyState);
+	        		//alert('Upload Status '+xhr.status+'  ReadyState'+xhr.readyState);
 	        		if (xhr.readyState==4 && xhr.status==200){
-			        	alert('Inside if for send');
-						alert('Response Text'+xhr.responseText);
+			        	//alert('Inside if for send');
+						//alert('Response Text'+xhr.responseText);
 			          	var dataReturn = $.parseJSON(xhr.responseText);
 						/*alert('dataReturn=',dataReturn);
 			          	var uploadResult = dataReturn['file'];
-			          	alert('uploadResult=',uploadResult);
+			          	//alert('uploadResult=',uploadResult);
 			          	fileNameUni = dataReturn['file'];*/
 			          	var uploadStatus = dataReturn['status'];
-			          	alert('uploadResult=',uploadResult); 
+			          	//alert('uploadResult=',uploadResult); 
 			
 			        	if (uploadStatus=='success'){
-			        		alert('successfully uploaded file');
+			        		//alert('successfully uploaded file');
 			            	submitForm(event, data);
 			            	alert('Upload Complete');
 	                		$('#upload_progess').hide();
@@ -347,12 +347,12 @@ $(function()
 			};//end file progress
 	        
 	        xhr.onerror = function () { alert("errorstatus: " + xhr.status + " ajaxoptions: " + ajaxOptions + " throwError: " + thrownError); };
-	 		alert("after open");
+	 		//alert("after open");
 	        xhr.open('POST', 'http://www.a-information.com/chatdawg/484flue.php', true);
-	        alert("after post");
+	        //alert("after post");
 	        xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	        var data = 'image=' + dataUrl;
-	        alert("DataUrl in URL- "+data); 
+	        //alert("DataUrl in URL- "+data); 
 	        xhr.send(data);
 		    alert ("ended send");
 		    }//End Temp Load		 
